@@ -1,0 +1,66 @@
+{
+  "name": "ygg",
+  "namespace": "yggdrash",
+  "version": "0.0.1",
+  "description": "Yggdrash JavaScript API, middleware to talk to a yggdrash node over RPC",
+  "main": "./index.js",
+  "directories": {
+    "lib": "./lib"
+  },
+  "dependencies": {
+    "bignumber.js": "git+https://github.com/frozeman/bignumber.js-nolookahead.git",
+    "crypto-js": "^3.1.4",
+    "utf8": "^2.1.1",
+    "xhr2": "*",
+    "xmlhttprequest": "*"
+  },
+  "browser": {
+    "xmlhttprequest": "./lib/utils/browser-xhr.js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "bower": ">=1.4.1",
+    "browserify": ">=10.0",
+    "chai": "^3.0.0",
+    "coveralls": "^2.11.2",
+    "del": ">=2.0.2",
+    "exorcist": "^0.4.0",
+    "istanbul": "^0.4.4",
+    "jshint": ">=2.5.0",
+    "mocha": ">=2.3.3",
+    "sandboxed-module": "^2.0.2",
+    "vinyl-source-stream": "^1.1.0",
+    "webpack": "^4.20.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "scripts": {
+    "build": "webpack",
+    "devserver": "webpack-dev-server --open --progress",
+    "lint": "jshint *.js lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yggdrash"
+  },
+  "homepage": "https://github.com/yggdrash",
+  "bugs": {
+    "url": "https://github.com/yggdrash"
+  },
+  "keywords": [
+    "yggdrash",
+    "javascript",
+    "API"
+  ],
+  "author": "yggdrash.io",
+  "authors": [
+    {
+      "name": "Tedy",
+      "email": "tedy@r2v.io",
+      "url": "https://github.com/yggdrash"
+    }
+  ],
+  "license": "ISC"
+}
