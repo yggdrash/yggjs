@@ -1,11 +1,17 @@
 # Yggdrash Javascript SDK
 
-```
-+var yggjs = require('ygg');
-+var ygg = new yggjs();
-```
+[Documentation]() soon...
 
-[Documentation]()
+### Usage
+```
+if (typeof ygg !== 'undefined') {
+    ygg = new Ygg(ygg.currentProvider);
+} else {
+    // Set the provider you want from Web3.providers
+    ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080")); // default - http://localhost:8080
+    console.log(ygg)
+}
+```
 
 ## Installation
 
@@ -14,6 +20,8 @@
 ```bash
 npm install ygg
 ```
+
+
 ### Requirements
 
 * Node.js
