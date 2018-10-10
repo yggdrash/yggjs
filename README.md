@@ -8,7 +8,7 @@
 if (typeof ygg !== 'undefined') {
     ygg = new Ygg(ygg.currentProvider);
 } else {
-    ygg = new Ygg(new Ygg.providers.HttpProvider('http://localhost:8080));
+    ygg = new Ygg(new Ygg.providers.HttpProvider('http://localhost:8080'));
 }
 ```
 
