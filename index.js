@@ -45,16 +45,17 @@ if (typeof ygg !== 'undefined') {
 
 // let tx = new ygg.tx(txHeaderData);
 
-// const signature = tx.sign(new Buffer('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex'));
+// const signature = tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
 
-// let registerData = tx.transferSerialize(branchId, 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6', transfer, signature);
+// let registerData = tx.transferSerialize(branchId, 'A771A6b5A6cAbE2ca35Fd55631717d95049D6338', transfer, signature);
 
 // console.log(registerData)
 
 
 /* stem */
 
-var owner = 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6';
+var owner = '0xA771A6b5A6cAbE2ca35Fd55631717d95049D6338';
+
 var seed = {            
          "name": 'YEED',
          "symbol": 'YEED',
@@ -63,7 +64,7 @@ var seed = {           
          "description": 'YEED is the currency used inside YGGDRASH. The vitality of the new branch chain is decided by the amount of YEED, which will be consumed gradually.',
          "tag": 0.1,
          "version": '0xcc9612ff91ff844938acdb6608e58506a2f21b8a5d77e88726c0897e8d1d02c0',
-         "reference_address": '0xcee3d4755e47055b530deeba062c5bd0c17eb00f',
+         "reference_address": '',
          "reserve_address": '0xcee3d4755e47055b530deeba062c5bd0c17eb00f',
          "owner": owner,
          "version_history":['0xcc9612ff91ff844938acdb6608e58506a2f21b8a5d77e88726c0897e8d1d02c0']
@@ -71,11 +72,11 @@ var seed = {           
 
 const branch = ygg.client.branch(seed);
 
-let jsonBody = ygg.utils.dataToJson(branch)
+let jsonBody = "["+ygg.utils.dataToJson(branch)+"]";  
 
 const bodyHash = ygg.utils.bodyHashHex(jsonBody)
 
-const bodyLength = ygg.utils.decimalToHex(bodyHash.length)
+const bodyLength = ygg.utils.decimalToHex(jsonBody.length)
 
 const txHeaderData = {
     "chain":`0xfe7b7c93dd23f78e12ad42650595bc0f874c88f7`,
@@ -88,10 +89,10 @@ const txHeaderData = {
 
 let tx = new ygg.tx(txHeaderData);
 
-const signature = tx.sign(new Buffer('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex'));
+const signature = tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
 
 let registerData = tx.branchRegister(branch, signature);
 
 let register = ygg.client.register(registerData);
 
-console.log(register)
+// console.log(register)
