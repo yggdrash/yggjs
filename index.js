@@ -4,22 +4,22 @@ if (typeof window !== 'undefined' && typeof window.Ygg === 'undefined') {
     window.Ygg = Ygg;
 }
 
-// module.exports = Ygg;
+module.exports = Ygg;
 
 
 
-if (typeof ygg !== 'undefined') {
-    ygg = new Ygg(ygg.currentProvider);
-} else {
-    ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080"));
-}
+// if (typeof ygg !== 'undefined') {
+//     ygg = new Ygg(ygg.currentProvider);
+// } else {
+//     ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080"));
+// }
 
-const timestamp = Math.round(new Date().getTime() / 1000);
+// const timestamp = Math.round(new Date().getTime() / 1000);
 
 /* balance */
 
-let val = ygg.client.getBalance('716af5c8960360c80ab29e2f76638bf299ac0bed', '0xa771a6b5a6cabe2ca35fd55631717d95049d6338');
-console.log(val);
+// let val = ygg.client.getBalance('716af5c8960360c80ab29e2f76638bf299ac0bed', '0xa771a6b5a6cabe2ca35fd55631717d95049d6338');
+// console.log("val", val);
 
 
 /* transfer */
