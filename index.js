@@ -18,8 +18,8 @@ const timestamp = Math.round(new Date().getTime() / 1000);
 
 /* balance */
 
-// let val = ygg.client.getBalance('d588b45c0afdcdffca62323bc1783e02f625666e', '0xa771a6b5a6cabe2ca35fd55631717d95049d6338');
-// console.log(val);
+let val = ygg.client.getBalance('716af5c8960360c80ab29e2f76638bf299ac0bed', '0xa771a6b5a6cabe2ca35fd55631717d95049d6338');
+console.log(val);
 
 
 /* transfer */
