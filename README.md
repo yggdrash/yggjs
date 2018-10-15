@@ -7,14 +7,8 @@
 ```
 var Yggdrash = require('ygg');
 
-if (typeof ygg !== 'undefined') {
-    ygg = new Yggdrash(ygg.currentProvider);
-} else {
-    ygg = new Yggdrash(new Yggdrash.providers.HttpProvider('http://localhost:8080'));
-}
-```
-```
 let ygg = new Yggdrash(new Yggdrash.providers.HttpProvider('http://localhost:8080'));
+
 ```
 
 ###

@@ -6,15 +6,9 @@ if (typeof window !== 'undefined' && typeof window.Ygg === 'undefined') {
 
 module.exports = Ygg;
 
+ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080"));
 
-
-// if (typeof ygg !== 'undefined') {
-//     ygg = new Ygg(ygg.currentProvider);
-// } else {
-//     ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080"));
-// }
-
-// const timestamp = Math.round(new Date().getTime() / 1000);
+const timestamp = Math.round(new Date().getTime() / 1000);
 
 /* balance */
 
@@ -44,11 +38,13 @@ module.exports = Ygg;
 
 // let tx = new ygg.tx(txHeaderData);
 
-// const signature = tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
+// tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
 
-// let transferData = tx.transferSerialize(branchId, 'A771A6b5A6cAbE2ca35Fd55631717d95049D6338', transfer, signature);
+// let serialize = tx.serialize(transfer, branchId);
 
-// ygg.client.sendTransaction(transferData)
+// console.log(serialize)
+
+// ygg.client.sendTransaction(serialize)
 
 
 
@@ -83,10 +79,12 @@ module.exports = Ygg;
 
 // let tx = new ygg.tx(txHeaderData);
 
-// const signature = tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
+// tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
 
-// let registerData = tx.branchRegister(branch, signature);
+// let serialize = tx.serialize(branch);
 
-// let register = ygg.client.register(registerData);
+// console.log(serialize)
+
+// let register = ygg.client.register(serialize);
 
 // console.log(register)
