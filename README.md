@@ -55,9 +55,9 @@ const txHeaderData = {
 
 let tx = new ygg.tx(txHeaderData);
 tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
-let registerSerialize = tx.serialize(branch);
+let serialize = tx.serialize(branch);
 
-let register = ygg.client.register(registerSerialize);
+let register = ygg.client.register(serialize);
 ```
 
 ## Installation
