@@ -25,7 +25,7 @@ module.exports = Ygg;
 
 // let jsonBody = ygg.utils.dataToJson(transfer)
 
-// let branchId = Buffer.from('d588b45c0afdcdffca62323bc1783e02f625666e', 'hex').toString('hex')
+// let branchId = Buffer.from('e41bc4c08d996cafb169274d5b7ca8f75898dc06', 'hex').toString('hex')
 
 // const txHeaderData = {
 //     "chain":`0x${branchId}`,
@@ -41,8 +41,6 @@ module.exports = Ygg;
 // tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
 
 // let serialize = tx.serialize(transfer, branchId);
-
-// console.log(serialize)
 
 // ygg.client.sendTransaction(serialize)
 
