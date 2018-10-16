@@ -6,15 +6,14 @@ if (typeof window !== 'undefined' && typeof window.Ygg === 'undefined') {
 
 module.exports = Ygg;
 
-// ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080"));
+ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080"));
 // const timestamp = Math.round(new Date().getTime() / 1000);
 
 /* balance */
 
-// let val = ygg.client.getBalance('716af5c8960360c80ab29e2f76638bf299ac0bed', '0xa771a6b5a6cabe2ca35fd55631717d95049d6338');
-// console.log("val", val);
+// let val = ygg.client.getBalance('0a39170899bd7e721730c7c312afc154d784034b', '0xaca4215631187ab5b3af0d4c251fdf45c79ad3c6')
 
-
+ygg.client.getBranch('YEED');
 /* transfer */
 
 // var to = '0x60212061e7bf6fba4b0607fc9c1f8bbb930d87d0';
