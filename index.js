@@ -49,7 +49,7 @@ module.exports = Ygg;
 /* stem */
 
 // let owner = '0xA771A6b5A6cAbE2ca35Fd55631717d95049D6338'
-// let reserve_address = 'f09e6313f6e5d835bb13d8cbf2e39829083b5d03' //node wallet author
+// let reserve_address = '0xf09e6313f6e5d835bb13d8cbf2e39829083b5d03' //node wallet author
 // var seed = {            
 //          "name": 'YEED',
 //          "symbol": 'YEED',
