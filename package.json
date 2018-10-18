@@ -10,19 +10,12 @@
   "dependencies": {
     "assert": "^1.4.1",
     "bignumber.js": "^7.2.1",
-    "bn.js": "^4.11.8",
-    "create-hash": "^1.2.0",
     "crypto-js": "^3.1.4",
-    "is-hex-prefixed": "^1.0.0",
     "jayson": "^2.1.0",
-    "keccak": "^1.4.0",
-    "rlp": "^2.1.0",
-    "safe-buffer": "^5.1.2",
-    "secp256k1": "^3.5.2",
-    "strip-hex-prefix": "^1.0.0",
     "utf8": "^2.1.1",
     "xhr2": "*",
-    "xmlhttprequest": "*"
+    "xmlhttprequest": "*",
+    "yggjs-utils": "git+https://github.com/wooheet/yggjs-utils.git"
   },
   "browser": {
     "xmlhttprequest": "./lib/utils/browser-xhr.js"

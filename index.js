@@ -25,7 +25,7 @@ module.exports = Ygg;
 // const body = ygg.client.transfer(to, amount);
 // let bodyJson = ygg.utils.dataToJson(body)
 
-// let branchId = "3a8171981418e123e2f71c1d155eb2137d9a8264"
+// let branchId = "9819a8ec0710bee412d8d26d0aa1ac70f2ed5802"
 
 // const rawTx = {
 //     "chain":`0x${ygg.utils.hexString(branchId)}`,
