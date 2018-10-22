@@ -33,9 +33,13 @@ module.exports = Ygg;
 // let tx = new ygg.tx(rawTx);
 
 // tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
+
+// let serialize = tx.serialize(body);
+// console.log(serialize)
+
 // console.log(tx.getSenderPublicKey().toString('hex'))
 // console.log(tx.getSenderAddress().toString('hex'))
-// resultNonce
+
 
 /* transfer */
 
@@ -61,7 +65,7 @@ module.exports = Ygg;
 // tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
 
 // let serialize = tx.serialize(body, branchId);
-
+// console.log(serialize)
 // ygg.client.sendTransaction(serialize).then((result) => {
 //     console.log("hash", result)    
 // })
