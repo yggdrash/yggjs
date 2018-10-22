@@ -16,7 +16,7 @@
     "utf8": "^2.1.1",
     "xhr2": "*",
     "xmlhttprequest": "*",
-    "yggjs-utils": "git+https://github.com/wooheet/yggjs-utils.git"
+    "yggjs-utils": "git+ssh://git@bitbucket.org/r2v/yggjs-utils.git"
   },
   "browser": {
     "xmlhttprequest": "./lib/utils/browser-xhr.js"
