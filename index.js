@@ -7,7 +7,7 @@ if (typeof window !== 'undefined' && typeof window.Ygg === 'undefined') {
 module.exports = Ygg;
 
 // ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080"));
-// const timestamp = Math.round(new Date().getTime() / 1000);
+// const timestamp = Math.round(new Date().getTime());
 
 /* get balance */
 
@@ -16,6 +16,26 @@ module.exports = Ygg;
 /* get branch */
 
 // ygg.client.getBranchId('YEED');
+
+/* node Hello */
+
+// let body = ygg.client.nodeHello();
+// let bodyJson = ygg.utils.dataToJson(body)
+
+// let nonce = ygg.utils.nonce().toString('hex')
+// const rawTx = {
+//     "timeStamp":`0x${ygg.utils.decimalToHex(timestamp)}`,
+//     "nonce":`0x${nonce}`,
+//     "bodyHash":`0x${ygg.utils.bodyHashHex(bodyJson)}`,    
+//     "bodyLength":`0x${ygg.utils.decimalToHex(bodyJson.length)}`
+//   };
+
+// let tx = new ygg.tx(rawTx);
+
+// tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
+// console.log(tx.getSenderPublicKey().toString('hex'))
+// console.log(tx.getSenderAddress().toString('hex'))
+// resultNonce
 
 /* transfer */
 

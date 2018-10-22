@@ -1,5 +1,5 @@
 var Ygg = require('../lib/ygg');
-var assert = require("assert"); //nodejs에서 제공하는 aseert 모듈
+var assert = require("assert"); 
 ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080"));
 var branchData = []
 var transferData = []
@@ -27,7 +27,7 @@ describe('Stem에 브랜치 등록 테스트', function() {
 			branchData.push(branch)
 		});
 
-		it('Branch Data 검증', function () {
+		it('Branch body 검증', function () {
 			assert.equal('create', branchData[0].method);
 			assert(typeof branchData[0].params === "object");
 			assert(branchData[0].params[0].branch.name.length !== 0 && branchData[0].params[0].branch.symbol.length !== 0)
@@ -41,6 +41,8 @@ describe('Stem에 브랜치 등록 테스트', function() {
 			assert(typeof branchData[0].params[0].branch.reference_address === "string");
 			assert(typeof branchData[0].params[0].branch.reserve_address === "string");
 			assert(typeof branchData[0].params[0].branch.owner === "string");
+			assert.equal(42, typeof branchData[0].params[0].branch.reserve_address.length);
+			assert.equal(42, typeof branchData[0].params[0].branch.owner.length);
 		});
 
 		it('Stem Transaction 메서드', function () {
@@ -64,10 +66,10 @@ describe('Stem에 브랜치 등록 테스트', function() {
 			assert(ygg.utils.isObject(serialize) === true);
 		});
 
-		it('transfer 메서드', function () {
+		it('transfer body 검증', function () {
 			var to = '0xaca4215631187ab5b3af0d4c251fdf45c79ad3c6';
 			var amount = 1001;
-			
+			assert.equal(42, to.length);
 			const transfer = ygg.client.transfer(to, amount);
 			assert(ygg.utils.isObject(transfer) === true);
 			transferData.push(transfer)
