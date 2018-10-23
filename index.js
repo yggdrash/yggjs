@@ -6,8 +6,8 @@ if (typeof window !== 'undefined' && typeof window.Ygg === 'undefined') {
 
 module.exports = Ygg;
 
-ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080"));
-const timestamp = Math.round(new Date().getTime());
+// ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080"));
+// const timestamp = Math.round(new Date().getTime());
 
 /* get balance */
 
@@ -19,49 +19,49 @@ const timestamp = Math.round(new Date().getTime());
 
 /* node Hello */
 
-let body = ygg.client.nodeHello();
-let bodyJson = ygg.utils.dataToJson(body)
+// let body = ygg.client.nodeHello();
+// let bodyJson = ygg.utils.dataToJson(body)
 
-const rawTx = {
-    "timeStamp":`0x${ygg.utils.decimalToHex(timestamp)}`,
-    "nonce":`0x${ygg.utils.nonce()}`,
-    "bodyHash":`0x${ygg.utils.bodyHashHex(bodyJson)}`,    
-    "bodyLength":`0x${ygg.utils.decimalToHex(bodyJson.length)}`
-  };
+// const rawTx = {
+//     "timeStamp":`0x${ygg.utils.decimalToHex(timestamp)}`,
+//     "nonce":`0x${ygg.utils.nonce()}`,
+//     "bodyHash":`0x${ygg.utils.bodyHashHex(bodyJson)}`,    
+//     "bodyLength":`0x${ygg.utils.decimalToHex(bodyJson.length)}`
+//   };
 
-let tx = new ygg.tx(rawTx);
+// let tx = new ygg.tx(rawTx);
 
-tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
+// tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
 
-let serialize = tx.serialize(body);
-// console.log("serialize", serialize)    
-// console.log("pubkey", tx.getSenderPublicKey().toString('hex'))
+// let serialize = tx.serialize(body);
+// // console.log("serialize", serialize)    
+// // console.log("pubkey", tx.getSenderPublicKey().toString('hex'))
 
-ygg.client.getNonce(serialize).then((result) => {
-    console.log("nonce", result)  
+// ygg.client.getNonce(serialize).then((result) => {
+//     // console.log("nonce", result)  
     
-    // let body = ygg.client.nodeRestart();
-    let body = ygg.client.nodeSetConfig(32921,"info");
-    let bodyJson = ygg.utils.dataToJson(body)
+//     // let body = ygg.client.nodeRestart();
+//     let body = ygg.client.nodeSetConfig(32921,"info");
+//     let bodyJson = ygg.utils.dataToJson(body)
 
-    const rawTx = {
-        "timeStamp":`0x${ygg.utils.decimalToHex(timestamp)}`,
-        "nonce":`0x${ygg.utils.nonce(result)}`,
-        "bodyHash":`0x${ygg.utils.bodyHashHex(bodyJson)}`,    
-        "bodyLength":`0x${ygg.utils.decimalToHex(bodyJson.length)}`
-    };
+//     const rawTx = {
+//         "timeStamp":`0x${ygg.utils.decimalToHex(timestamp)}`,
+//         "nonce":`0x${ygg.utils.nonce(result)}`,
+//         "bodyHash":`0x${ygg.utils.bodyHashHex(bodyJson)}`,    
+//         "bodyLength":`0x${ygg.utils.decimalToHex(bodyJson.length)}`
+//     };
 
-    let tx = new ygg.tx(rawTx);
+//     let tx = new ygg.tx(rawTx);
 
-    tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
+//     tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
 
-    let serialize = tx.serialize(body);
-    // console.log("serialize", serialize) 
+//     let serialize = tx.serialize(body);
+//     console.log("serialize", serialize) 
 
-    ygg.client.requestCommand(serialize).then((result) => {
-        console.log("result", result)    
-    })
-})
+//     ygg.client.requestCommand(serialize).then((result) => {
+//         console.log("result", result)    
+//     })
+// })
 
 
 /* transfer */
