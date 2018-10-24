@@ -85,7 +85,7 @@ describe('Stem에 브랜치 등록 테스트', function() {
 		});
 
 		it('Branch Transaction 메서드', function () {
-			const timestamp = Math.round(new Date().getTime() / 1000);
+			const timestamp = Math.round(new Date().getTime());
 			let jsonBody = ygg.utils.dataToJson(transferData[0])
 
 			const txHeaderData = {
