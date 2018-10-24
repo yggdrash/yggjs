@@ -7,7 +7,7 @@ if (typeof window !== 'undefined' && typeof window.Ygg === 'undefined') {
 module.exports = Ygg;
 
 // ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080"));
-// const timestamp = Math.round(new Date().getTime());
+// const timestamp = Math.round(new Date().getTime() / 1000);
 
 /* get balance */
 
@@ -112,7 +112,6 @@ module.exports = Ygg;
 // }
 
 // const branch = ygg.client.branch(seed);
-
 // let jsonBody = ygg.utils.dataToJson(branch);  
 
 // const rawTx = {
@@ -125,11 +124,11 @@ module.exports = Ygg;
 // };
 
 // let tx = new ygg.tx(rawTx);
-
 // tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
 
 // let serialize = tx.serialize(branch);
-
+// console.log(serialize)
 // ygg.client.plant(serialize).then((result) => {
 //     console.log("hash", result)    
 // })
+
