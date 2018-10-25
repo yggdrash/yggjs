@@ -4,9 +4,9 @@ ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080"));
 var branchData = []
 var transferData = []
 
-describe('Stem에 브랜치 등록 테스트', function() {
-	describe('스템 메서드', function () {
-		it('Branch 메서드', function () {
+describe('Branch to stem test...', function() {
+	describe('seed format check.', function () {
+		it('seed check', function () {
 			var seed = {            
 				"name": 'YEED',
 	            "symbol": 'YEED',
@@ -27,7 +27,7 @@ describe('Stem에 브랜치 등록 테스트', function() {
 			branchData.push(branch)
 		});
 
-		it('Branch body 검증', function () {
+		it('Branch body check.', function () {
 			assert.equal('create', branchData[0].method);
 			assert(typeof branchData[0].params === "object");
 			assert(branchData[0].params[0].branch.name.length !== 0 && branchData[0].params[0].branch.symbol.length !== 0)
@@ -45,18 +45,26 @@ describe('Stem에 브랜치 등록 테스트', function() {
 			assert.equal(42, typeof branchData[0].params[0].branch.owner.length);
 		});
 
-		it('Stem Transaction 메서드', function () {
-
+		it('Stem Transaction header check', function () {
+			let timestamp = new Date().getTime();
 			let jsonBody = ygg.utils.dataToJson(branchData[0]);  
 			assert(typeof jsonBody === "string");
 			const txHeaderData = {
 				"chain":`0xfe7b7c93dd23f78e12ad42650595bc0f874c88f7`,
 				"version":`0x0000000000000000`,
 				"type":`0x0000000000000000`,
-				"timeStamp":`0x${ygg.utils.decimalToHex(branchData[0].params[0].branch.timestamp)}`,
+				"timeStamp":`0x${ygg.utils.decimalToHex(timestamp)}`,
 				"bodyHash": `0x${ygg.utils.bodyHashHex(jsonBody)}`,
 				"bodyLength":`0x${ygg.utils.decimalToHex(jsonBody.length)}`
 			};
+
+			let t = ygg.utils.decimalToHex(timestamp)
+			let b = ygg.utils.bodyHashHex(jsonBody)
+			let bl = ygg.utils.decimalToHex(bodyJson.length)
+	  
+			assert(t.length === 16)
+			assert(b.length === 64)
+			assert(bl.length === 16)
 
 			let tx = new ygg.tx(txHeaderData);
 
@@ -65,7 +73,9 @@ describe('Stem에 브랜치 등록 테스트', function() {
 			let serialize = tx.serialize(branchData[0]);
 			assert(ygg.utils.isObject(serialize) === true);
 		});
+	});
 
+	describe('Transfer Tests...', () => {
 		it('transfer body 검증', function () {
 			var to = '0xaca4215631187ab5b3af0d4c251fdf45c79ad3c6';
 			var amount = 1001;
@@ -85,7 +95,7 @@ describe('Stem에 브랜치 등록 테스트', function() {
 		});
 
 		it('Branch Transaction 메서드', function () {
-			const timestamp = Math.round(new Date().getTime());
+			let timestamp = new Date().getTime();
 			let jsonBody = ygg.utils.dataToJson(transferData[0])
 
 			const txHeaderData = {
@@ -105,5 +115,34 @@ describe('Stem에 브랜치 등록 테스트', function() {
 			assert(ygg.utils.isObject(serialize) === true);
 			assert.equal(true, tx.verifySignature());
 		});
-	});
+	  })
+
+	describe('Node Tests...', () => {
+
+		it('body lenth should be 24.', () => {
+		  let nonceBody = ygg.client.nodeHello();
+		  let bodyJson = ygg.utils.dataToJson(nonceBody)
+		  assert(bodyJson.length === 24)
+	
+		  let body = ygg.client.nodeRestart()
+		  let bodyJson = ygg.utils.dataToJson(body)
+		  assert(bodyJson.length === 22)
+		})
+	  
+		it('transaction header check.', () => {
+		  let timestamp = new Date().getTime()
+		  let nonceBody = ygg.client.nodeHello();
+		  let bodyJson = ygg.utils.dataToJson(nonceBody)
+	
+		  let t = ygg.utils.decimalToHex(timestamp)
+		  let n = ygg.utils.nonce()
+		  let b = ygg.utils.bodyHashHex(bodyJson)
+		  let bl = ygg.utils.decimalToHex(bodyJson.length)
+	
+		  assert(t.length === 16)
+		  assert(n.length === 32)
+		  assert(b.length === 64)
+		  assert(bl.length === 16)
+		})
+	  })
 });
