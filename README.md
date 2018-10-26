@@ -1,47 +1,26 @@
 # Yggdrash Javascript SDK
-
-## Docs
-[Documentation](https://yggdrash.atlassian.net/wiki/spaces/DEV/pages/32768001/SDK)
+It is the Software Development Kit of Javascript, the most commonly used programming language in the world, to support the smooth development of developers.
+The SDK includes libraries such as API clients, transaction methods for local signing, and important constants for ecosystems.
 
 ## Requirements
 - Node.js - version 10.12.0
 - NPM
+- [YGGDRASH Node](https://github.com/yggdrash/yggdrash)
 
-### Usage
-```
-var Yggdrash = require('ygg');
-
-let ygg = new Yggdrash(new Yggdrash.providers.HttpProvider('http://localhost:8080'));
-
-```
-
-###
-Example
-#### getBranch
-```
-ygg.client.getBranch(branchName);
-
-//a771a6b5a6cabe2ca35fd55631717d95049d6338
-```
-
-#### getBalance
-```
-let branchId = 'a771a6b5a6cabe2ca35fd55631717d95049d6338';
-let address = 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6';
-
-ygg.client.getBalance(branchId, address);
-```
+## Docs
+[Documentation](./docs/index.md)
 
 ## Installation
 
 ### Node.js
-
 ```bash
-npm install ygg
+npm install yggjs
+```
+### Usage
+```
+const yggjs = require('yggjs');
+let ygg = new yggjs(new yggjs.providers.HttpProvider('http://localhost:8080'));
 ```
 
-
-### Requirements
-
-* Node.js
-* npm
+## License
+This project is licensed under the [MIT License](LICENSE).
