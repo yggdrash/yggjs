@@ -10,66 +10,60 @@ To enable YGGDRASH Node, you can use the ygg object provided by the yggjs librar
 - Yggdrash JavaScript SDK
   - [Getting Started](#getting-started)
   - [ygg.js API Reference](#yggjs-api-reference)
+## Getting Started
+* [Adding ygg](#adding-ygg)
 
-  
+### Adding yggjs
+First you need to get yggjs into your project. This can be done using the following methods:
+- npm: `npm install yggjs`
 
-
- ## Getting Started
- * [Adding ygg](#adding-ygg)
-
- ### Adding yggjs
- First you need to get yggjs into your project. This can be done using the following methods:
- - npm: `npm install yggjs`
-
- ```js
- ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
- ```
-
-
- ## YGGJS API Reference
- * [ygg](#ygg)
-		 - [isConnected()](#yggjsisconnected) (Not implemented yet)
-        - [setProvider(provider)](#yggjssetProvider)
-  * [version](#yggjsversionapi)
-     * [api](#yggjsversionapi)
-     * [node/getNode]() (Not implemented yet)
-     * [network/getNetwork]() (Not implemented yet)
-  * [net](#yggjsnet) (Not implemented yet)
-        - [listening/getListening]()
-        - [peerCount/getPeerCount]()
-  * [wallet](#yggjswallet) (Not implemented yet)
-        - [lockAccount]()
-        - [unlockAccount]()
-        - [newAccount]()
-        - [sign]()
-  * [client](#wyggjsclient)
-        - [getBranch](#yggjsgetBranch)
-        - [getBalance](#yggjsgetBalance)
-        - [transfer](#yggjstransfer)
-        - [sendTransaction](#yggjssendTransaction)
-        - [branch](#yggjsbranch)
-        - [plant](#yggjsplant)
-        - [getBlocks](#yggjsgetBlocks) (Not implemented yet)
-        - [getBlockNumber](#yggjsgetBlockNumber) (Not implemented yet)
-        - [getTransaction](#yggjsgetTransaction) (Not implemented yet)
-        - [getTransactionFromBlock](#yggjsgetTransactionFromBlock) (Not implemented yet)
-        - [getTransactionReceipt](#yggjsgetTransactionReceipt) (Not implemented yet)
-    * [transaction](#yggjstransaction)
-        - [tx](#yggjstx)
-        - [sign](#yggjssign)
-        - [getTxHash](#yggjsgetTxHash)
-        - [vrs](#yggjsvrs)
-        - [serialize](#yggjsserialize)
-    * [utils](#yggjsutils)
-        - [bodyHash(hexString)](#yggjsbodyHash)
-        - [dataToJson(hexString)](#yggjsdataToJson)
-        - [sha3(string, options)](#yggjssha3)
-        - [toHex(stringOrNumber)](#yggjstohex)
-        - [toAscii(hexString)](#yggjstoascii)
-        - [fromAscii(textString)](#yggjsfromascii)
-        - [toDecimal(hexString)](#yggjstodecimal)
-        - [fromDecimal(number)](#yggjsfromdecimal)
-        - [isAddress(hexString)](#yggjsisaddress)
+```js
+ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
+```
+## YGGJS API Reference
+* [ygg](#ygg)
+    - [isConnected()](#yggjsisconnected) (Not implemented yet)
+    - [setProvider(provider)](#yggjssetProvider)
+* [version](#yggjsversionapi)
+    - [api](#yggjsversionapi)
+    - [node/getNode]() (Not implemented yet)
+    - [network/getNetwork]() (Not implemented yet)
+* [net](#yggjsnet) (Not implemented yet)
+    - [listening/getListening]()
+    - [peerCount/getPeerCount]()
+* [wallet](#yggjswallet) (Not implemented yet)
+    - [lockAccount]()
+    - [unlockAccount]()
+    - [newAccount]()
+    - [sign]()
+* [client](#wyggjsclient)
+    - [getBranch](#yggjsgetBranch)
+    - [getBalance](#yggjsgetBalance)
+    - [transfer](#yggjstransfer)
+    - [sendTransaction](#yggjssendTransaction)
+    - [branch](#yggjsbranch)
+    - [plant](#yggjsplant)
+    - [getBlocks](#yggjsgetBlocks) (Not implemented yet)
+    - [getBlockNumber](#yggjsgetBlockNumber) (Not implemented yet)
+    - [getTransaction](#yggjsgetTransaction) (Not implemented yet)
+    - [getTransactionFromBlock](#yggjsgetTransactionFromBlock) (Not implemented yet)
+    - [getTransactionReceipt](#yggjsgetTransactionReceipt) (Not implemented yet)
+* [transaction](#yggjstransaction)
+    - [tx](#yggjstx)
+    - [sign](#yggjssign)
+    - [getTxHash](#yggjsgetTxHash)
+    - [vrs](#yggjsvrs)
+    - [serialize](#yggjsserialize)
+* [utils](#yggjsutils)
+    - [bodyHash(hexString)](#yggjsbodyHash)
+    - [dataToJson(hexString)](#yggjsdataToJson)
+    - [sha3(string, options)](#yggjssha3)
+    - [toHex(stringOrNumber)](#yggjstohex)
+    - [toAscii(hexString)](#yggjstoascii)
+    - [fromAscii(textString)](#yggjsfromascii)
+    - [toDecimal(hexString)](#yggjstodecimal)
+    - [fromDecimal(number)](#yggjsfromdecimal)
+    - [isAddress(hexString)](#yggjsisaddress)
 
    
 ## Usage
@@ -83,7 +77,7 @@ let yggjs = require('yggjs');
 // create an instance of yggjs using the HTTP provider.
 let ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
 ```
-###### Example using HTTP Basic Authentication
+##### Example using HTTP Basic Authentication
 ```js
 var yggjs = require('yggjs');
 var ygg = new yggjs(new .providers.HttpProvider("http://localhost:8080", 0, BasicAuthUsername, BasicAuthPassword));
@@ -91,13 +85,17 @@ var ygg = new yggjs(new .providers.HttpProvider("http://localhost:8080", 0, Basi
 ```
 
 ***
+
 #### ygg.isConnected (Not implemented yet)
     ygg.isConnected()
 Should be called to check if a connection to a node exists
+
 ##### Parameters
 none
+
 ##### Returns
 `Boolean`
+
 ##### Example
 ```js
 if(!ygg.isConnected()) {
@@ -114,21 +112,28 @@ if(!ygg.isConnected()) {
 #### ygg.setProvider
     ygg.setProvider(provider)
 Should be called to set provider.
+
 ##### Parameters
 none
+
 ##### Returns
 `undefined`
+
 ##### Example
 ```js
 ygg.setProvider(new yggjs.providers.HttpProvider('http://localhost:8080')); 
 ```
+
 ***
 
 #### ygg.version.api
+
 ##### Parameters
 none
+
 ##### Returns
 `String` - The yggdrash js api version.
+
 ##### Example
 ```js
 let version = ygg.version.api;
