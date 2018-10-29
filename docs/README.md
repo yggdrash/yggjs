@@ -57,12 +57,12 @@ ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
 * [utils](#ygg.utils)
     - [bodyHash(hexString)](#ygg.utils.bodyHash)
     - [dataToJson(hexString)](#ygg.utils.dataToJson)
+    - [decimalToHex(number)](#ygg.utils.decimalToHex)
     - [sha3(string, options)](#ygg.utils.sha3)
     - [toHex(stringOrNumber)](#ygg.utils.tohex)
-    - [toAscii(hexString)](#ygg.utils.toascii)
-    - [fromAscii(textString)](#ygg.utils.fromascii)
     - [toDecimal(hexString)](#ygg.utils.todecimal)
     - [fromDecimal(number)](#ygg.utils.fromdecimal)
+    - [bigNumber(number)](#ygg.utils.bigNumber)
     - [isAddress(hexString)](#ygg.utils.isaddress)
 
    
@@ -593,14 +593,83 @@ console.log(jsonBody)
 //{"method":"TRANSFER","params":[{"address":"60212061e7bf6fba4b0607fc9c1f8bbb930d87d0","amount":"1004"}]}]
 ```
 ***
+### ygg.utils.decimalToHex
+#### Parameters
+`Number` - Convert decimal to 8-byte hex string
+#### Returns
+`String` -  8-byte hex string
+#### Example
+```js
+let hex = ygg.utils.decimalToHex(1540798630385)
+console.log(hex) // 00000166beef066e
+```
+***
 ### ygg.utils.sha3
 #### Parameters
-`String` - 
+`String` - The string to hash using the Keccak-256 SHA3 algorithm
 #### Returns
 `String` - The Keccak-256 SHA3 of the given data.
 #### Example
 ```js
-let jsonBody = ygg.utils.dataToJson(branch);
-console.log(jsonBody)
-//{"method":"TRANSFER","params":[{"address":"60212061e7bf6fba4b0607fc9c1f8bbb930d87d0","amount":"1004"}]}]
+let hash = ygg.utils.sha3("Some string to be hashed");
+console.log(hash); // "0xbf5ea52511be400262ab4d0b8e9f5993d3bc02abefe58ec7c87c81c8ae60ef22"
+let hashOfHash = ygg.utils.sha3(hash, {encoding: 'hex'});
+console.log(hashOfHash); // "0xbf5ea52511be400262ab4d0b8e9f5993d3bc02abefe58ec7c87c81c8ae60ef22"
+```
+***
+### ygg.utils.toHex
+#### Parameters
+`String|Number|Object|Array|BigNumber` - The value to parse to HEX.
+#### Returns
+`String` - The hex string 
+#### Example
+```js
+let hex = ygg.utils.toHex({test: 'test'});
+console.log(hex); // '0xa22746b227457374227d7657374223'
+```
+***
+### ygg.utils.toDecimal
+#### Parameters
+`String` - A HEX string to be converted to a number.
+#### Returns
+`Number` - The number representing the data hexString.
+#### Example
+```js
+let num = ygg.utils.toDecimal('0x16');
+console.log(num); // 22
+```
+***
+### ygg.utils.fromDecimal
+#### Parameters
+`String|Number` - A number to be converted to a HEX string.
+#### Returns
+`Number` - The HEX string representing of the given number.
+#### Example
+```js
+let hex = ygg.utils.fromDecimal('22');
+console.log(hex); // 0x16
+```
+***
+### ygg.utils.bigNumber
+#### Parameters
+`String|Number` - A number, number string or HEX string of a number.
+#### Returns
+`BigNumber` - A BigNumber instance representing the given value.
+#### Example
+```js
+let value = ygg.utils.bigNumber('100000000000000000000004');
+console.log(value); // instanceOf BigNumber
+console.log(value.toNumber()); // 1.0000000000000002e+23
+console.log(value.toString(10)); // '100000000000000000000004'
+```
+***
+### ygg.utils.isAddress
+#### Parameters
+`String` - A HEX string.
+#### Returns
+`Boolean` - **false** if it's not on a valid address format.
+#### Example
+```js
+let isAddress = ygg.utils.isAddress('0xa771a6b5a6cabe2ca35fd55631717d95049d6338');
+console.log(isAddress); // true
 ```
