@@ -150,7 +150,7 @@ console.log(version); // "0.0.1"
 #### Example
 ```js
 var version = ygg.version.node;
-console.log(version); // "Mist/v0.9.3/darwin/go1.4.1"
+console.log(version); // "ygg/v0.0.3/"
 ```
 
 ***
