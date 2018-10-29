@@ -73,13 +73,13 @@ ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
 Should be called to set provider.
 #### Example
 ```js
-let yggjs = require('yggjs');
+let yggjs = require('@yggdrash/sdk');
 // create an instance of yggjs using the HTTP provider.
 let ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
 ```
 #### Example using HTTP Basic Authentication
 ```js
-var yggjs = require('yggjs');
+var yggjs = require('@yggdrash/sdk');
 var ygg = new yggjs(new .providers.HttpProvider("http://localhost:8080", 0, BasicAuthUsername, BasicAuthPassword));
 //Note: HttpProvider takes 4 arguments (host, timeout, user, password)
 ```
