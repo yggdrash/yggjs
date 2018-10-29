@@ -127,8 +127,7 @@ module.exports = Ygg;
 // tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
 
 // let serialize = tx.serialize(branch);
-// // console.log(serialize)
+// console.log(serialize)
 // ygg.client.plant(serialize).then((result) => {
 //     console.log("hash", result)    
 // })
-

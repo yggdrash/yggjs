@@ -1,7 +1,7 @@
 {
   "name": "@yggdrash/sdk",
   "namespace": "yggdrash",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Yggdrash JavaScript API, middleware to talk to a yggdrash node over RPC",
   "main": "./index.js",
   "directories": {
@@ -15,8 +15,7 @@
     "jayson": "^2.1.0",
     "utf8": "^2.1.1",
     "xhr2": "*",
-    "xmlhttprequest": "*",
-    "yggjs-utils": "git+ssh://git@bitbucket.org/r2v/yggjs-utils.git"
+    "xmlhttprequest": "*"
   },
   "browser": {
     "xmlhttprequest": "./lib/utils/browser-xhr.js"

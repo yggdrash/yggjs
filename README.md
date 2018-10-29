@@ -8,17 +8,17 @@ The SDK includes libraries such as API clients, transaction methods for local si
 - [YGGDRASH Node](https://github.com/yggdrash/yggdrash)
 
 ## Docs
-[Documentation](./docs/index.md)
+[Documentation](https://github.com/yggdrash/yggjs/blob/develop/docs/README.md)
 
 ## Installation
 
 ### Node.js
 ```bash
-npm install yggjs
+npm install @yggdrash/sdk
 ```
 ### Usage
 ```
-const yggjs = require('yggjs');
+const yggjs = require('@yggdrash/sdk');
 let ygg = new yggjs(new yggjs.providers.HttpProvider('http://localhost:8080'));
 ```
 
