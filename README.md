@@ -8,7 +8,7 @@ The SDK includes libraries such as API clients, transaction methods for local si
 - [YGGDRASH Node](https://github.com/yggdrash/yggdrash)
 
 ## Docs
-[Documentation](https://github.com/yggdrash/yggjs/blob/develop/docs/README.md)
+[Documentation](https://github.com/yggdrash/yggjs/tree/develop/docs)
 
 ## Installation
 
