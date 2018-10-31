@@ -1,4 +1,4 @@
-var Ygg = require('./lib/ygg');
+const Ygg = require('./lib/ygg');
 
 if (typeof window !== 'undefined' && typeof window.Ygg === 'undefined') {
     window.Ygg = Ygg;

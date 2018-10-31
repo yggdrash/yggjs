@@ -48,7 +48,7 @@ ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
     - [getTransaction](#ygg.getTransaction) (Not implemented yet)
     - [getTransactionFromBlock](#ygg.getTransactionFromBlock) (Not implemented yet)
     - [getTransactionReceipt](#ygg.getTransactionReceipt) (Not implemented yet)
-* [transaction](#ygg.transaction)
+* [transaction](#ygg.tx)
     - [tx](#ygg.tx)
     - [sign](#ygg.sign)
     - [getTxHash](#ygg.getTxHash)
@@ -79,8 +79,8 @@ let ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
 ```
 #### Example using HTTP Basic Authentication
 ```js
-var yggjs = require('@yggdrash/sdk');
-var ygg = new yggjs(new .providers.HttpProvider("http://localhost:8080", 0, BasicAuthUsername, BasicAuthPassword));
+let yggjs = require('@yggdrash/sdk');
+let ygg = new yggjs(new .providers.HttpProvider("http://localhost:8080", 0, BasicAuthUsername, BasicAuthPassword));
 //Note: HttpProvider takes 4 arguments (host, timeout, user, password)
 ```
 
@@ -149,7 +149,7 @@ console.log(version); // "0.0.1"
 `String` - The client/node version.
 #### Example
 ```js
-var version = ygg.version.node;
+let version = ygg.version.node;
 console.log(version); // "ygg/v0.0.3/"
 ```
 
@@ -164,7 +164,7 @@ none
 `String` - The network protocol version.
 #### Example
 ```js
-var version = ygg.version.network;
+let version = ygg.version.network;
 console.log(version); // 54
 ```
 
@@ -196,15 +196,15 @@ none
 `Number` - The number of peers currently connected to the client.
 #### Example
 ```js
-var peerCount = ygg.net.peerCount;
+let peerCount = ygg.net.peerCount;
 console.log(peerCount); // 4
 ```
 ***
 ## ygg.wallet
-### ygg.wallet.lockAccount (Not implemented yet)
-### ygg.wallet.unlockAccount (Not implemented yet)
-### ygg.wallet.newAccount (Not implemented yet)
-### ygg.wallet.sign (Not implemented yet) 
+#### ygg.wallet.lockAccount (Not implemented yet)
+#### ygg.wallet.unlockAccount (Not implemented yet)
+#### ygg.wallet.newAccount (Not implemented yet)
+#### ygg.wallet.sign (Not implemented yet) 
 
 ## ygg.client
 ### ygg.client.getBranch
@@ -297,13 +297,8 @@ tx.sign(privateKey);
 let serialize = tx.serialize(body, branchId);
  
 ygg.client.sendTransaction(serialize).then((txHash) => {
-    console.log("hash", txHash)   
+    console.log("hash", txHash)   // ebbe3d2ae42f7fdf0d6f81bca7aec9cac79d58ee688d34ac75ef3a03cfc4d56b
 })
-/*
-transaction hash
-ebbe3d2ae42f7fdf0d6f81bca7aec9cac79d58ee688d34ac75ef3a03cfc4d56b
-*/
-
 ```
 ***
 ### ygg.client.branch
@@ -314,7 +309,7 @@ body required when sending a stem transaction
 `Object` - body data
 #### Example
 ```js
-var seed = {           
+let seed = {           
          "name": 'YEED',
          "symbol": 'YEED',
          "property": 'currency',
@@ -388,12 +383,8 @@ tx.sign(privateKey);
 let serialize = tx.serialize(body);
  
 ygg.client.plant(serialize).then((txHash) => {
-    console.log("hash", txHash)   
+    console.log("hash", txHash)   // ebbe3d2ae42f7fdf0d6f81bca7aec9cac79d58ee688d34ac75ef3a03cfc4d56b
 })
-
-/*
-ebbe3d2ae42f7fdf0d6f81bca7aec9cac79d58ee688d34ac75ef3a03cfc4d56b
-*/
 ```
 ***
 
@@ -457,7 +448,7 @@ const rawTx = {
 }
  
 let privateKey = new Buffer('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
-var tx = new ygg.tx(rawTx);
+let tx = new ygg.tx(rawTx);
 const signature = tx.sign(privateKey);
 
 console.log(signature)
@@ -510,7 +501,7 @@ const rawTx = {
 }
  
 const privateKey = new Buffer('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
-var tx = new ygg.tx(rawTx);
+let tx = new ygg.tx(rawTx);
 tx.sign(privateKey);
  
 let serializeSignature = tx.vrs();
