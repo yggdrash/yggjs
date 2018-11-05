@@ -282,7 +282,7 @@ const body = ygg.client.transfer(to, amount);
 let branchId = Buffer.from('d588b45c0afdcdffca62323bc1783e02f625666e', 'hex').toString('hex')
  
 const rawTx = {
-    "chain":'0xfe7b7c93dd23f78e12ad42650595bc0f874c88f7',
+    "chain":`0x${branchId}`,
     "version":'0x0000000000000000',
     "type":'0x0000000000000000',
     "timeStamp":'0x000000005bada008',
@@ -294,7 +294,7 @@ let privateKey = new Buffer('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11
 const tx = new ygg.tx(rawTx);
 tx.sign(privateKey);
  
-let serialize = tx.serialize(body, branchId);
+let serialize = tx.serialize(body);
  
 ygg.client.sendTransaction(serialize).then((txHash) => {
     console.log("hash", txHash)   // ebbe3d2ae42f7fdf0d6f81bca7aec9cac79d58ee688d34ac75ef3a03cfc4d56b
