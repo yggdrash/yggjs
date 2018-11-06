@@ -31,7 +31,16 @@ ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
 * [net](#ygg.net) (Not implemented yet)
     - [listening/getListening]()
     - [peerCount/getPeerCount]()
-* [wallet](#ygg.wallet) (Not implemented yet)
+* [wallet](#ygg.wallet)
+    - [create]()
+    - [getPrivateKey]()
+    - [signTx]()
+    - [signWithPK]()
+* [hdwallet](#ygg.hdwallet)
+    - [fromMasterSeed]()
+    - [getWallet]()
+    - [getAddressString]()
+* [wallet](#ygg.nodeWallet) (Not implemented yet)
     - [lockAccount]()
     - [unlockAccount]()
     - [newAccount]()
@@ -59,6 +68,7 @@ ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
     - [dataToJson(hexString)](#ygg.utils.dataToJson)
     - [decimalToHex(number)](#ygg.utils.decimalToHex)
     - [sha3(string, options)](#ygg.utils.sha3)
+    - [keccak(string|number|buffer)](#ygg.utils.keccak)
     - [toHex(stringOrNumber)](#ygg.utils.tohex)
     - [toDecimal(hexString)](#ygg.utils.todecimal)
     - [fromDecimal(number)](#ygg.utils.fromdecimal)
@@ -201,16 +211,94 @@ console.log(peerCount); // 4
 ```
 ***
 ## ygg.wallet
-#### ygg.wallet.lockAccount (Not implemented yet)
-#### ygg.wallet.unlockAccount (Not implemented yet)
-#### ygg.wallet.newAccount (Not implemented yet)
-#### ygg.wallet.sign (Not implemented yet) 
+### ygg.wallet.create 
+#### Parameters
+`String` - password
+#### Returns
+`String` - address
+`Object` - key store date
+#### Example
+```js
+const { address, keystoreData } = ygg.wallet.create('password')
+console.log(address); //a771a6b5a6cabe2ca35fd55631717d95049d6338
+console.log(keystoreData); //{"version":3,"id":"9afbb249-55cb-485d-97a4-bf5d04efd68c","address":"2242ed1b42bd3fc1b03a078c508cd1d59d246114","crypto":{"ciphertext":"7aec4822b09ce9ebf25dad588dca9b620168bae048cf26cc39c1b66767c563c1","cipherparams":{"iv":"cc22c2d52d41ace21f679a22f67b94b8"},"cipher":"aes-128-ctr","kdf":"scrypt","kdfparams":{"dklen":32,"salt":"5fbe7560f23b228ef5e3ba743da8ff1348be212838f61df65f1269d2c9ee8a2c","n":4096,"r":8,"p":1},"mac":"bea46ca2c6cfe48e2f24756b8eac2e8f148f8bb3324cc724b6c090ad86aec499"}}
+```
+***
+### ygg.wallet.getPrivateKey
+#### Parameters
+`Object` - key store date
+`String` - password
+#### Returns
+`String` - private keuy
+#### Example
+```js
+const privateKey = ygg.wallet.getPrivateKey(keystoreData, 'password');
+console.log(privateKey); //3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E
+```
+*** 
+### ygg.wallet.signTx 
+#### Parameters
+`Object` - key store date
+`String` - password
+`Buffer` - transaction header massage
+#### Returns
+`Buffer` - signature
+#### Example
+```js
+const signature = ygg.wallet.signTx(keystoreData, 'password', msg)
+console.log(signature)
+/*
+{ r: <Buffer 8d f1 b6 5d 26 ae af 39 50 35 36 f2 24 f7 8d 3f 36 31 eb f3 ba 7b f5 44 25 78 c2 3d f3 e5 7c c3>,
+  s: <Buffer 59 65 dd 3c 79 04 f0 cf c3 d6 36 15 66 a3 e8 a0 d8 fb b9 32 08 70 d9 c5 92 95 b2 06 8a 94 1d b3>,
+  v: 28 }
+*/
+```
+*** 
+### ygg.wallet.signWithPK 
+#### Parameters
+`String` - password
+`Buffer` - transaction header massage
+#### Returns
+`Buffer` - transaction header massage
+#### Example
+```js
+const privateKey = '3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E'
+const signature = ygg.wallet.signWithPK(privateKey, msg);
+/*
+{ r: <Buffer 8d f1 b6 5d 26 ae af 39 50 35 36 f2 24 f7 8d 3f 36 31 eb f3 ba 7b f5 44 25 78 c2 3d f3 e5 7c c3>,
+  s: <Buffer 59 65 dd 3c 79 04 f0 cf c3 d6 36 15 66 a3 e8 a0 d8 fb b9 32 08 70 d9 c5 92 95 b2 06 8a 94 1d b3>,
+  v: 28 }
+*/
+```
+*** 
+
+## ygg.hdwallet
+### ygg.hdwallet.fromMasterSeed
+Creates an hdkey object from a master seed buffer. Accepts an optional versions object.
+#### Parameters
+`Buffer` - seed word
+#### Returns
+`Object` - hdwallet information
+#### Example
+```js
+let mnemonic = bip39.generateMnemonic();
+const hdwallet =  ygg.hdwallet.fromMasterSeed(bip39.mnemonicToSeed(mnemonic));
+const wallet = hdwallet.derivePath(HDpath).getWallet();
+```
+*** 
+
+
+## ygg.nodwWallet
+#### ygg.nodwWallet.lockAccount (Not implemented yet)
+#### ygg.nodwWallet.unlockAccount (Not implemented yet)
+#### ygg.nodwWallet.newAccount (Not implemented yet)
+#### ygg.nodwWallet.sign (Not implemented yet) 
 
 ## ygg.client
 ### ygg.client.getBranch
 View the branches registered on the stem
 #### Parameters
-
+none
 #### Returns
 `String` - branch id (network id)
 #### Example
@@ -223,7 +311,7 @@ console.log(branchId); //a771a6b5a6cabe2ca35fd55631717d95049d6338
 ### ygg.client.getBalance
 View balance in your account
 #### Parameters
-
+none
 #### Returns
 `String` -  `bignumber` balance value
 #### Example
@@ -231,8 +319,10 @@ View balance in your account
 let branchId = 'fe7b7c93dd23f78e12ad42650595bc0f874c88f7';
 let toAddress = '0xaca4215631187ab5b3af0d4c251fdf45c79ad3c6';
  
-let balance = ygg.client.getbalance(branchId, toAddress);
-console.log(balance); // bignumber
+ygg.client.getbalance(branchId, toAddress).then((balance) => {
+    console.log(balance); // 1000000000
+})
+
 ```
 ***
 ### ygg.client.transfer
@@ -597,15 +687,26 @@ console.log(hex) // 00000166beef066e
 ***
 ### ygg.utils.sha3
 #### Parameters
-`String` - The string to hash using the Keccak-256 SHA3 algorithm
+`String` - The string to hash using the SHA3 algorithm
 #### Returns
-`String` - The Keccak-256 SHA3 of the given data.
+`String` - SHA3 of the given data.
 #### Example
 ```js
 let hash = ygg.utils.sha3("Some string to be hashed");
 console.log(hash); // "0xbf5ea52511be400262ab4d0b8e9f5993d3bc02abefe58ec7c87c81c8ae60ef22"
 let hashOfHash = ygg.utils.sha3(hash, {encoding: 'hex'});
 console.log(hashOfHash); // "0xbf5ea52511be400262ab4d0b8e9f5993d3bc02abefe58ec7c87c81c8ae60ef22"
+```
+***
+### ygg.utils.keccak
+#### Parameters
+`String | Buffer | Number` - The string to hash using the Keccak-256 SHA3 algorithm
+#### Returns
+`Buffer` - The Keccak-256 SHA3 of the given data.
+#### Example
+```js
+let hash = ygg.utils.keccak("Some string to be hashed");
+console.log(hash); // "3717ec34f5b0345c3b480d9cd402f0be1111c0e04cb9dbe1da5b933e353a5bba"
 ```
 ***
 ### ygg.utils.toHex

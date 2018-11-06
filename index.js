@@ -12,21 +12,26 @@ ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080"));
 
 // const { address, keystoreData } = ygg.wallet.create('password')
 // const pk = ygg.wallet.getPrivateKey(keystoreData, 'password');
+// let body = ygg.client.nodeHello();
+// let bodyJson = ygg.utils.dataToJson(body)
+// const signature = ygg.wallet.signTx(keystoreData, 'password', ygg.utils.keccak(bodyJson))
+// console.log(signature)
 
 // console.log(address)
 // console.log(pk.toString('hex'))
 // console.log(keystoreData)
 
-const HDpath = "m/44'/60'/0'/0/0";
-const bip39 = require('bip39')
-let mnemonic = bip39.generateMnemonic();
-const hdwallet =  ygg.hdwallet.fromMasterSeed(bip39.mnemonicToSeed(mnemonic));
-const wallet = hdwallet.derivePath(HDpath).getWallet();
-const address = wallet.getAddressString();
-console.log(address)
+// const HDpath = "m/44'/60'/0'/0/0";
+// const bip39 = require('bip39')
+// let mnemonic = bip39.generateMnemonic();
+
+// const hdwallet =  ygg.hdwallet.fromMasterSeed(bip39.mnemonicToSeed(mnemonic));
+// console.log(hdwallet)
+// const wallet = hdwallet.derivePath(HDpath).getWallet();
+// const address = wallet.getAddressString();
+// console.log(address)
 
 /* genesis */
-
 
 
 
@@ -112,7 +117,9 @@ console.log(address)
 // console.log(merkleTools.getMerkleRoot().toString('hex'))
 
 /* get balance */
-// let val = ygg.client.getBalance('0a39170899bd7e721730c7c312afc154d784034b', '0xaca4215631187ab5b3af0d4c251fdf45c79ad3c6')
+ygg.client.getBalance('c675b96caad16eaf1bd159fddade28082e8466c3', '0x5db10750e8caff27f906b41c71b3471057dd2001').then((result) => {
+    console.log("val", result)    
+})
 /* get branch */
 // ygg.client.getBranchId('YEED');
 /* node Hello */
@@ -189,7 +196,7 @@ console.log(address)
 // const branch = ygg.client.branch(seed);
 // let jsonBody = ygg.utils.dataToJson(branch);  
 // const rawTx = {
-//     "chain":`0xfe7b7c93dd23f78e12ad42650595bc0f874c88f7`,
+//     "chain":`0x9435b0e642e99606cd9cdf362e63fb2d46fca12b`,
 //     "version":`0x0000000000000000`,
 //     "type":`0x0000000000000000`,
 //     "timeStamp":`0x${ygg.utils.decimalToHex(new Date().getTime())}`,
