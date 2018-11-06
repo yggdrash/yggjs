@@ -40,7 +40,7 @@ ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
     - [fromMasterSeed]()
     - [getWallet]()
     - [getAddressString]()
-* [wallet](#ygg.nodeWallet) (Not implemented yet)
+* [nodeWallet](#ygg.nodeWallet) (Not implemented yet)
     - [lockAccount]()
     - [unlockAccount]()
     - [newAccount]()
@@ -288,11 +288,11 @@ const wallet = hdwallet.derivePath(HDpath).getWallet();
 *** 
 
 
-## ygg.nodwWallet
-#### ygg.nodwWallet.lockAccount (Not implemented yet)
-#### ygg.nodwWallet.unlockAccount (Not implemented yet)
-#### ygg.nodwWallet.newAccount (Not implemented yet)
-#### ygg.nodwWallet.sign (Not implemented yet) 
+## ygg.nodeWallet
+#### ygg.nodeWallet.lockAccount (Not implemented yet)
+#### ygg.nodeWallet.unlockAccount (Not implemented yet)
+#### ygg.nodeWallet.newAccount (Not implemented yet)
+#### ygg.nodeWallet.sign (Not implemented yet) 
 
 ## ygg.client
 ### ygg.client.getBranch
