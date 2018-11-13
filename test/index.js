@@ -68,7 +68,7 @@ describe('Branch to stem test...', function() {
 
 			let tx = new ygg.tx(txHeaderData);
 
-			tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
+			tx.sign(Buffer.from('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
 
 			let serialize = tx.serialize(branchData[0]);
 			assert(ygg.utils.isObject(serialize) === true);
@@ -109,7 +109,7 @@ describe('Branch to stem test...', function() {
 			
 			let tx = new ygg.tx(txHeaderData);
 			
-			tx.sign(new Buffer('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
+			tx.sign(Buffer.from('3D8A58EA7FA6EF7E038791F3B837FA7BC62DC38CAAFE67AFC4D4567A64D4966E', 'hex'));
 			
 			let serialize = tx.serialize(transferData[0], branchData[0].params[0].branchId);
 			assert(ygg.utils.isObject(serialize) === true);

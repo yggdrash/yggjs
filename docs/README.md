@@ -380,7 +380,7 @@ const rawTx = {
     "bodyLength":'0x000000000000028a'
 }
  
-let privateKey = new Buffer('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
+let privateKey = Buffer.from('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
 const tx = new ygg.tx(rawTx);
 tx.sign(privateKey);
  
@@ -466,7 +466,7 @@ const rawTx = {
     "bodyLength":'0x000000000000028a'
 }
  
-let privateKey = new Buffer('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
+let privateKey = Buffer.from('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
 const tx = new ygg.tx(rawTx);
 tx.sign(privateKey);
  
@@ -537,7 +537,7 @@ const rawTx = {
     "bodyLength":'0x000000000000028a'
 }
  
-let privateKey = new Buffer('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
+let privateKey = Buffer.from('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
 let tx = new ygg.tx(rawTx);
 const signature = tx.sign(privateKey);
 
@@ -566,7 +566,7 @@ const rawTx = {
     "bodyLength":'0x000000000000028a'
 }
  
-const privateKey = new Buffer('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
+const privateKey = Buffer.from('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
 const tx = new ygg.tx(rawTx);
 tx.sign(privateKey);
 let txHash = tx.getTxHash();
@@ -590,7 +590,7 @@ const rawTx = {
     "bodyLength":'0x000000000000028a'
 }
  
-const privateKey = new Buffer('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
+const privateKey = Buffer.from('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
 let tx = new ygg.tx(rawTx);
 tx.sign(privateKey);
  
@@ -621,7 +621,7 @@ const txHeaderData = {
     "bodyLength":`0x${ygg.utils.decimalToHex(jsonBody.length)}`
 };
  
-let privateKey = new Buffer('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
+let privateKey = Buffer.from('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
 let tx = new ygg.tx(txHeaderData);
 tx.sign(privateKey);
  
