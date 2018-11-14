@@ -3,6 +3,7 @@ var assert = require("assert");
 ygg = new Ygg(new Ygg.providers.HttpProvider("http://localhost:8080"));
 var branchData = []
 var transferData = []
+const { Buffer } = require('safe-buffer')
 
 describe('Branch to stem test...', function() {
 	describe('seed format check.', function () {
