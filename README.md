@@ -3,8 +3,9 @@ It is the Software Development Kit of Javascript, the most commonly used program
 The SDK includes libraries such as API clients, transaction methods for local signing, and important constants for ecosystems.
 
 ## Requirements
-- Node.js - version 10.12.0
-- NPM
+- Node ≥ v10.12.0
+- NPM ≥ v6.4.1
+- Yarn ≥ 1.12.3
 - [YGGDRASH Node](https://github.com/yggdrash/yggdrash)
 
 ## Docs
