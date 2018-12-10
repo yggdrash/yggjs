@@ -38,12 +38,13 @@ describe('Transaction', () => {
   })
 
   it('sign()', () => {
-    tx.sign()
+    tx.sign(fixture.privateKey)
     should.exist(tx.signature)
     tx.signature.should.equal(fixture.signature)
+    tx.hash.should.equal(fixture.transactionId)
   })
 
-  it.skip('should be completed when signed ', () => {
+  it('should be completed when signed ', () => {
     tx.sign(fixture.privateKey)
     tx.should.have.all.keys(
       'timestamp', 'bodyLength', 'body', 'author', 'hash', 'chain', 'type', 'version',
