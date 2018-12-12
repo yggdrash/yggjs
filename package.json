@@ -32,23 +32,15 @@
     "xmlhttprequest": "./lib/utils/browser-xhr.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "babel-cli": "^6.26.0",
-    "babel-loader": "^8.0.4",
-    "babel-preset-env": "^1.7.0",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/register": "^7.0.0",
     "chai": "^4.2.0",
-    "coveralls": "^3.0.2",
-    "del": "^3.0.0",
-    "exorcist": "^1.0.1",
-    "istanbul": "^0.4.5",
-    "mocha": "^5.2.0",
-    "sandboxed-module": "^2.0.3",
-    "vinyl-source-stream": "^2.0.0",
-    "webpack": "^4.25.1",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "mocha": "^5.2.0"
   },
   "scripts": {
+    "dev": "yarn test -w",
+    "test": "mocha --require @babel/register './test/*.spec.js'",
     "build": "webpack",
     "devserver": "webpack-dev-server --open --progress",
     "lint": "jshint *.js lib",
