@@ -4,10 +4,8 @@ const Yggdrash = require('../index')
 describe('Version 1.0', () => {
   it('Transaction', () => {
     const ygg = new Yggdrash()
-    const body = ygg.client.transfer('2dbe588da70cafe98bd1797119e96165a8e74191', '1000')
+    const body = ygg.client.transferBody('2dbe588da70cafe98bd1797119e96165a8e74191', '1000')
     console.log(body)
-    let bodyJson = ygg.utils.dataToJson(body)
-    console.log(bodyJson)
     let tx = new ygg.tx(txHeader())
     console.log(tx)
     tx.sign(Buffer.from('310d08df73d4bc989ea82a7002ceb6f60896ebc80feeeb80c04b6a27f9b4985e', 'hex'))
