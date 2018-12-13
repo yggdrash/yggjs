@@ -33,7 +33,7 @@ describe('Transaction', () => {
   describe('sign()', () => {
     it('should throw an error when it is called twice.', () => {
       tx.sign(dummy.privateKey)
-      expect(tx.sign(dummy.privateKey)).to.throw('Already signed.')
+      expect(() => tx.sign(dummy.privateKey)).to.throw('Already signed.')
     })
   })
 
@@ -42,18 +42,17 @@ describe('Transaction', () => {
       tx.sign(dummy.privateKey)
     })
 
-    it('jsonRpcClient 로 request 함수를 한번 호출해야 한다.', () => {
+    it('should call callback function only once', () => {
       let callback = sinon.fake()
 
       tx.send(callback)
 
-      expect(callback.called).to.equal(true)
+      expect(callback.calledOnce).to.true
     })
 
-    it('응답으로 transaction id를 가진 Promise 함수를 받아야 한다.', () => {
+    it('should return promise included transaction id', () => {
       let callback = sinon.fake.resolves(
         'c3c79ac8f082f7d6432bc42878ea2b6c3e4d41b7f4cf60b71c20447fe51ff51c')
-
       expect(callback()).to.be.a('promise')
       callback().then(res => {
         expect(res).to.have.lengthOf(64)
