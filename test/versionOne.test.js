@@ -11,6 +11,9 @@ describe('Version 1.0', () => {
     let tx = new ygg.tx(txHeader())
     console.log(tx)
     tx.sign(Buffer.from('310d08df73d4bc989ea82a7002ceb6f60896ebc80feeeb80c04b6a27f9b4985e', 'hex'))
+    let serialize = tx.serialize(body)
+    console.log(serialize)
+    console.log('ttttxxxx',tx)
   })
 })
 
