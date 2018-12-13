@@ -1,54 +1,62 @@
 'use strict'
 
 import 'chai/register-should';
+import { expect } from 'chai'
 import Transaction from "../lib/v2/Transaction"
-import * as fixture from './fixture/Transaction.fixture'
-import { Buffer } from 'safe-buffer'
+import sinon from 'sinon'
+
+const dummy = {
+  branchId: '91b29a1453258d72ca6fbbcabb8dca10cca944fb',
+  methodName: 'transfer',
+  params: {
+    to: '1a0cdead3d1d1dbeef848fef9053b4f0ae06db9e',
+    amount: '1000'
+  },
+  privateKey: '310d08df73d4bc989ea82a7002ceb6f60896ebc80feeeb80c04b6a27f9b4985e'
+}
 
 describe('Transaction', () => {
   let tx;
 
   beforeEach(() => {
-    tx = new Transaction(fixture.branchId, 'transfer', fixture.params)
+    tx = new Transaction(dummy.branchId, dummy.methodName, dummy.params)
   })
 
-  it('should be filled with body & bodyLength & chain when object created.', () => {
-    should.exist(tx)
-    tx.should.have.all.keys('chain', 'body', 'bodyLength')
-    tx.body.should.equal(
-      '[{"method":"transfer","params":' +
-      `[{"address":"${fixture.params.address}","amount":"${fixture.params.amount}"}]}]`)
+  describe('new Transaction()', () => {
+    it('should throw an error when invalid parameters.', () => {
+
+      expect(0).to.equal(1)
+    })
   })
 
-  it('hashingBody()', () => {
-    tx.hashingBody()
-    tx.bodyHash.should.equal('e895380ce95a51273d08ef189b8fea3b42f22c20f35ab4a0abff4bc569f94597')
+  describe('sign()', () => {
+    it('should throw an error when it is called twice.', () => {
+      tx.sign(dummy.privateKey)
+      expect(tx.sign(dummy.privateKey)).to.throw('Already signed.')
+    })
   })
 
-  it('createRawData()', () => {
-    tx.prepare()
-    let raw = tx.createRawData()
-    raw.should.equal(fixture.raw)
-  })
+  describe('send()', () => {
+    beforeEach(() => {
+      tx.sign(dummy.privateKey)
+    })
 
-  it('createMessageHash()', () => {
-    tx.prepare()
-    tx.createMessageHash().equals(Buffer.from(fixture.messageHash, 'hex'))
-      .should.equal(true)
-  })
+    it('jsonRpcClient 로 request 함수를 한번 호출해야 한다.', () => {
+      let callback = sinon.fake()
 
-  it('sign()', () => {
-    tx.sign(fixture.privateKey)
-    should.exist(tx.signature)
-    tx.signature.should.equal(fixture.signature)
-    tx.hash.should.equal(fixture.transactionId)
-  })
+      tx.send(callback)
 
-  it('should be completed when signed ', () => {
-    tx.sign(fixture.privateKey)
-    tx.should.have.all.keys(
-      'timestamp', 'bodyLength', 'body', 'author', 'hash', 'chain', 'type', 'version',
-      'bodyHash', 'signature'
-    )
+      expect(callback.called).to.equal(true)
+    })
+
+    it('응답으로 transaction id를 가진 Promise 함수를 받아야 한다.', () => {
+      let callback = sinon.fake.resolves(
+        'c3c79ac8f082f7d6432bc42878ea2b6c3e4d41b7f4cf60b71c20447fe51ff51c')
+
+      expect(callback()).to.be.a('promise')
+      callback().then(res => {
+        expect(res).to.have.lengthOf(64)
+      })
+    })
   })
 })
