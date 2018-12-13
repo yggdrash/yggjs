@@ -24,8 +24,9 @@ describe('Transaction', () => {
 
   describe('new Transaction()', () => {
     it('should throw an error when invalid parameters.', () => {
-
-      expect(0).to.equal(1)
+      expect(() => new Transaction(1,1,1)).to.throw(TypeError)
+      expect(() => new Transaction(dummy.branchId, dummy.methodName, dummy.params))
+        .to.not.throw()
     })
   })
 
