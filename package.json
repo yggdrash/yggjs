@@ -1,7 +1,7 @@
 {
   "name": "@yggdrash/sdk",
   "namespace": "yggdrash",
-  "version": "0.0.5-beta.1",
+  "version": "0.0.5-beta.2",
   "description": "Yggdrash JavaScript API, middleware to talk to a yggdrash node over RPC",
   "main": "./index.js",
   "directories": {
@@ -32,20 +32,13 @@
     "xmlhttprequest": "./lib/utils/browser-xhr.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.6",
-    "@babel/preset-env": "^7.1.6",
-    "@babel/register": "^7.0.0",
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
     "sinon": "^7.2.0"
   },
   "scripts": {
     "dev": "yarn test -w",
-    "test": "mocha --require @babel/register './test/*.spec.js'",
-    "build": "webpack",
-    "devserver": "webpack-dev-server --open --progress",
-    "lint": "jshint *.js lib",
-    "build-es5": "babel lib -w -d es5"
+    "test": "mocha './test/*.spec.js'"
   },
   "repository": {
     "type": "git",
