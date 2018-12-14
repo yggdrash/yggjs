@@ -1,62 +1,61 @@
-// 'use strict'
+'use strict'
 
-// import 'chai/register-should';
-// import { expect } from 'chai'
-// import Transaction from "../lib/v2/Transaction"
-// import sinon from 'sinon'
+const { expect } = require('chai')
+const Transaction = require('../lib/v2/Transaction')
+const sinon = require('sinon')
 
-// const dummy = {
-//   branchId: '91b29a1453258d72ca6fbbcabb8dca10cca944fb',
-//   methodName: 'transfer',
-//   params: {
-//     to: '1a0cdead3d1d1dbeef848fef9053b4f0ae06db9e',
-//     amount: '1000'
-//   },
-//   privateKey: '310d08df73d4bc989ea82a7002ceb6f60896ebc80feeeb80c04b6a27f9b4985e'
-// }
+const dummy = {
+  branchId: '91b29a1453258d72ca6fbbcabb8dca10cca944fb',
+  methodName: 'transfer',
+  params: {
+    to: '1a0cdead3d1d1dbeef848fef9053b4f0ae06db9e',
+    amount: '1000'
+  },
+  privateKey: '310d08df73d4bc989ea82a7002ceb6f60896ebc80feeeb80c04b6a27f9b4985e'
+}
 
-// describe('Transaction', () => {
-//   let tx;
+describe('Transaction', () => {
+  let tx;
 
-//   beforeEach(() => {
-//     tx = new Transaction(dummy.branchId, dummy.methodName, dummy.params)
-//   })
+  beforeEach(() => {
+    tx = new Transaction(dummy.branchId, dummy.methodName, dummy.params)
+  })
 
-//   describe('new Transaction()', () => {
-//     it('should throw an error when invalid parameters.', () => {
+  describe('new Transaction()', () => {
+    it('should throw an error when invalid parameters.', () => {
+      expect(() => new Transaction(1,1,1)).to.throw(TypeError)
+      expect(() => new Transaction(dummy.branchId, dummy.methodName, dummy.params))
+        .to.not.throw()
+    })
+  })
 
-//       expect(0).to.equal(1)
-//     })
-//   })
+  describe('sign()', () => {
+    it('should throw an error when it is called twice.', () => {
+      tx.sign(dummy.privateKey)
+      expect(() => tx.sign(dummy.privateKey)).to.throw('Already signed.')
+    })
+  })
 
-//   describe('sign()', () => {
-//     it('should throw an error when it is called twice.', () => {
-//       tx.sign(dummy.privateKey)
-//       expect(tx.sign(dummy.privateKey)).to.throw('Already signed.')
-//     })
-//   })
+  describe('send()', () => {
+    beforeEach(() => {
+      tx.sign(dummy.privateKey)
+    })
 
-//   describe('send()', () => {
-//     beforeEach(() => {
-//       tx.sign(dummy.privateKey)
-//     })
+    it('should call callback function only once', () => {
+      let callback = sinon.fake()
 
-//     it('jsonRpcClient 로 request 함수를 한번 호출해야 한다.', () => {
-//       let callback = sinon.fake()
+      tx.send(callback)
 
-//       tx.send(callback)
+      expect(callback.calledOnce).to.true
+    })
 
-//       expect(callback.called).to.equal(true)
-//     })
-
-//     it('응답으로 transaction id를 가진 Promise 함수를 받아야 한다.', () => {
-//       let callback = sinon.fake.resolves(
-//         'c3c79ac8f082f7d6432bc42878ea2b6c3e4d41b7f4cf60b71c20447fe51ff51c')
-
-//       expect(callback()).to.be.a('promise')
-//       callback().then(res => {
-//         expect(res).to.have.lengthOf(64)
-//       })
-//     })
-//   })
-// })
+    it('should return promise included transaction id', () => {
+      let callback = sinon.fake.resolves(
+        'c3c79ac8f082f7d6432bc42878ea2b6c3e4d41b7f4cf60b71c20447fe51ff51c')
+      expect(callback()).to.be.a('promise')
+      callback().then(res => {
+        expect(res).to.have.lengthOf(64)
+      })
+    })
+  })
+})
