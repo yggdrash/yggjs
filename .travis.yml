@@ -4,3 +4,12 @@ node_js:
 cache: yarn
 script:
   - yarn test
+deploy:
+  provider: npm
+  email: dev@yggdrash.io
+  api_key:
+    secure: LToVvcbgwXy7ApnQcNRqhqcTnekrRzrKGJq6t33FKD2+ruhELRiXRq+L3gI35ZdsdyS3Gqkwxuv+do17hJpE+rcZbf+zxi2BTY6eW7f6/PnlggMKnJJb+YIVIHBc/5KjXfu6YnMSlY64054Now/LGh44sma8BZmx6BYyoyt99A45gnu9RwkJ2NGwB7JAE9Nc5hIbjvcFkeLqnyTOCy7f/tb7U3n2C7UehI1d0NUO4e1aVhnirAh3OXAWQXamopfm1OnzdE6uXTSstAPN84vO8yR2gGw4dsl4wu/q8Da3YPkug3cVO7FAbAvzh9BV05QarDN2oTr4EwclCJtqxS2/LWhqeo0UubpIKksq52X+EohdpdAQ2YrAmnoEfI3LBIZiCQXKKEeebfWvgaR2IqoewDjBGl1Abr1io72FqphJRBlaHQ70e52C56ZCF3vWJqWtCqpbxA1odWsjSerdkydM7qYuiw361HHrgmTS+Cq6MxPFHAH40LfBxiXQmODKgkGe0/Lf3K9afdQxNpDT9c4Bde9SBsQgJbUKsH0HfUbqCZBorrrE8w5DsPwThJvW8QHpp5Ugq/a3EhHhrkJu4K4b95VxVn5GA+eGq5y+F8KHt1exe5I5kMl3xmgPZv5WUD8kvWvTUSc97hIt91ioOtxixGqFrLKKhgJ3oHhBGKkyGII=
+  on:
+    tags: true
+    condition: "$TRAVIS_TAG =~ -beta."
+  tag: beta
