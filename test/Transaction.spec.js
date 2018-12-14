@@ -1,9 +1,8 @@
 'use strict'
 
-import 'chai/register-should';
-import { expect } from 'chai'
-import Transaction from "../lib/v2/Transaction"
-import sinon from 'sinon'
+const { expect } = require('chai')
+const Transaction = require('../lib/v2/Transaction')
+const sinon = require('sinon')
 
 const dummy = {
   branchId: '91b29a1453258d72ca6fbbcabb8dca10cca944fb',
