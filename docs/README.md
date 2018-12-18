@@ -65,7 +65,7 @@ ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
     - [serialize](#ygg.serialize)
 * [utils](#ygg.utils)
     - [bodyHash(hexString)](#ygg.utils.bodyHash)
-    - [dataToJson(hexString)](#ygg.utils.dataToJson)
+    - [jsonToArrayString(hexString)](#ygg.utils.jsonToArrayString)
     - [decimalToHex(number)](#ygg.utils.decimalToHex)
     - [sha3(string, options)](#ygg.utils.sha3)
     - [keccak(string|number|buffer)](#ygg.utils.keccak)
@@ -504,7 +504,6 @@ ygg.client.plant(serialize).then((txHash) => {
 ```js
 
 const branch = ygg.client.branch(seed);
-let jsonBody = ygg.utils.dataToJson(branch)
  
 const rawTx = {
     "chain":'0xfe7b7c93dd23f78e12ad42650595bc0f874c88f7', // Branch ID or Network ID
@@ -610,8 +609,6 @@ console.log(serializeSignature)//1b4ee31e6f61c91e73a643bfa6b8980f7913ddba2f66272
 ```js
 const branch = ygg.client.branch(seed);
  
-let jsonBody = ygg.utils.dataToJson(branch); 
- 
 const txHeaderData = {
     "chain":`0xfe7b7c93dd23f78e12ad42650595bc0f874c88f7`,
     "version":`0x0000000000000000`,
@@ -655,21 +652,20 @@ Body hash for entering transaction headers
 #### Example
 ```js
 const branch = ygg.client.branch(seed);
-let jsonBody = ygg.utils.dataToJson(branch);
-let bodyHash = ygg.utils.bodyHashHex(jsonBody)
+let bodyHash = ygg.utils.bodyHashHex(branch)
 
 console.log(bodyHash)
 //a4ab4d1dff1130d3d9861285a80dfb325737e892c2f8d534ff1858833d871d70
 ```
 ***
-### ygg.utils.dataToJson
+### ygg.utils.jsonToArrayString
 #### Parameters
 `String` - body data
 #### Returns
 `Object` -  body
 #### Example
 ```js
-let jsonBody = ygg.utils.dataToJson(branch);
+let jsonBody = ygg.utils.jsonToArrayString(branch);
 console.log(jsonBody)
 //{"method":"TRANSFER","params":[{"address":"60212061e7bf6fba4b0607fc9c1f8bbb930d87d0","amount":"1004"}]}]
 ```
