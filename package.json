@@ -1,7 +1,7 @@
 {
   "name": "@yggdrash/sdk",
   "namespace": "yggdrash",
-  "version": "0.0.5-beta.2",
+  "version": "0.1.0",
   "description": "Yggdrash JavaScript API, middleware to talk to a yggdrash node over RPC",
   "main": "./index.js",
   "directories": {
@@ -53,13 +53,12 @@
     "javascript",
     "API"
   ],
-  "author": "yggdrash.io",
   "authors": [
     {
-      "name": "Tedy",
-      "email": "tedy@r2v.io",
-      "url": "https://github.com/yggdrash"
+      "name": "YGGDRASH Dev Team",
+      "email": "dev@yggdrash.io",
+      "url": "https://developers.yggdrash.io"
     }
   ],
-  "license": "ISC"
+  "license": "MIT"
 }
