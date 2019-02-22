@@ -1,4 +1,4 @@
-# Yggdrash Javascript SDK
+# YGGDRASH Javascript SDK
 It is the Software Development Kit of Javascript, the most commonly used programming language in the world, to support the smooth development of developers.
 The SDK includes libraries such as API clients, transaction methods for local signing, and important constants for ecosystems.
 
