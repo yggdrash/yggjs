@@ -30,11 +30,18 @@ describe('Version 1.0', () => {
 describe('Version 2.0', () => {
   it('new Transaction()', () => {
     let params = {to: '2dbe588da70cafe98bd1797119e96165a8e74191', amount: '1000'}
-    let tx = new Transaction(branchId, 'transfer', params)
+    let contractId = ""
+    let tx = new Transaction(branchId, contractId, 'transfer', params)
+    // tx sign by json wallet
+
     tx.sign('310d08df73d4bc989ea82a7002ceb6f60896ebc80feeeb80c04b6a27f9b4985e')
+
+      console.debug(tx.getRawTransaction())
+      /*
     tx.send().then(res => {
       console.log(res)
     })
+    */
   })
 
   //To Be

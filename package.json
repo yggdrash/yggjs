@@ -26,7 +26,8 @@
     "strip-hex-prefix": "^1.0.0",
     "utf8": "^3.0.0",
     "xhr2": "^0.1.4",
-    "xmlhttprequest": "^1.8.0"
+    "xmlhttprequest": "^1.8.0",
+    "int64-buffer":"^0.99.1007"
   },
   "browser": {
     "xmlhttprequest": "./lib/utils/browser-xhr.js"
