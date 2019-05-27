@@ -24,4 +24,4 @@ let ygg = new yggjs(new yggjs.providers.HttpProvider('http://localhost:8080'));
 ```
 
 ## License
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under [version 2.0 of the Apache License](LICENSE).
