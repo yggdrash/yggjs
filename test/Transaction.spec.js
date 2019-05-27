@@ -42,12 +42,6 @@ describe('Transaction', () => {
       tx.sign(dummy.privateKey)
     })
 
-    it('should call callback function only once', () => {
-      let callback = sinon.fake()
-      tx.send(callback)
-      expect(callback.calledOnce).to.true
-    })
-
     it('should return promise included transaction id', () => {
       let callback = sinon.fake.resolves(
         'c3c79ac8f082f7d6432bc42878ea2b6c3e4d41b7f4cf60b71c20447fe51ff51c')
