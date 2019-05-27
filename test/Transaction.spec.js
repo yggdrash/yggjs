@@ -6,6 +6,7 @@ const sinon = require('sinon')
 
 const dummy = {
   branchId: '91b29a1453258d72ca6fbbcabb8dca10cca944fb',
+  contractVersion: '58d1e024502844b4d1ac0ff4a9e57c7228a6e50a',
   methodName: 'transfer',
   params: {
     to: '1a0cdead3d1d1dbeef848fef9053b4f0ae06db9e',
@@ -18,13 +19,13 @@ describe('Transaction', () => {
   let tx;
 
   beforeEach(() => {
-    tx = new Transaction(dummy.branchId, dummy.methodName, dummy.params)
+    tx = new Transaction(dummy.branchId, dummy.contractVersion, dummy.methodName, dummy.params)
   })
 
   describe('new Transaction()', () => {
     it('should throw an error when invalid parameters.', () => {
-      expect(() => new Transaction(1,1,1)).to.throw(TypeError)
-      expect(() => new Transaction(dummy.branchId, dummy.methodName, dummy.params))
+      expect(() => new Transaction(1,1,1,1)).to.throw(TypeError)
+      expect(() => new Transaction(dummy.branchId, dummy.contractVersion, dummy.methodName, dummy.params))
         .to.not.throw()
     })
   })
@@ -43,9 +44,7 @@ describe('Transaction', () => {
 
     it('should call callback function only once', () => {
       let callback = sinon.fake()
-
       tx.send(callback)
-
       expect(callback.calledOnce).to.true
     })
 
