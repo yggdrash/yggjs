@@ -2,6 +2,7 @@
 
 const { expect } = require('chai')
 const ksHelper = require('../lib/local/wallet/generation')
+const Wallet = require('../lib/local/wallet')
 const sinon = require('sinon')
 
 const dummy = {
@@ -27,6 +28,25 @@ const dummy = {
     }
 }
 
+const testKey = {
+    "address": "101167aaf090581b91c08480f6e559acdd9a3ddd",
+    "crypto": {
+        "cipher": "aes-128-cbc",
+        "cipherparams": {
+            "iv": "b07bbbaaa8547c869db901555709237e"
+        },
+        "ciphertext": "24962c18373831ef1a92ffdcab09a2d63fe95daea7229a160d62165a2e08be081024cef9f0747a4f78a7ee3b85c5a288",
+        "kdf": "pbkdf2",
+        "kdfparams": {
+            "c": 262144,
+            "dklen": 32,
+            "prf": "hmac-sha256",
+            "salt": "9c3c640f622866da13a18235afd485eef17812abab4b78526ce2f962ea431b37"
+        },
+        "mac": "299662e68256cdb203137e268265a3eae2825ec34bbce5a4860297e4e09eb80f"
+    }
+}
+
 // const { address, keystoreData } = ygg.wallet.create(password)
 // const pk  = ygg.wallet.getPrivateKey(keystoreData, password)
 // const { address, keystoreData } = ygg.wallet.import(privateKey, password)
@@ -40,9 +60,20 @@ describe('Wallet', () => {
   describe('new wallet()', () => {
     it('create account', () => {
         let { address, keystoreData } = ksHelper.create(dummy.password)
+        console.debug("address : ", address)
     })
     it('import account', () => {
       let { address, keystoreData } = ksHelper.import(dummy.privateKey, dummy.password)
+        console.log("address : ",address)
+    })
+    it('import by keystore', () => {
+      let password = "Aa1234567890!"
+      const wallet = Wallet.fromKeystore(testKey, password)
+        expect(wallet.getAddress().toString("hex")).to.equal(testKey.address)
+        let wallet2 = ksHelper.fromPrivateKey(wallet.getPrivateKey().toString("hex"))
+        expect(wallet2.getAddressString()).to.equal(wallet.getAddressString())
+        expect(wallet2.getPrivateKeyString()).to.equal(wallet.getPrivateKeyString())
+
     })
     it('get pk', () => {
       let pk = ksHelper.getPrivateKey(dummy.keystore, dummy.password)
