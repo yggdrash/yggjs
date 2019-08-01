@@ -46,12 +46,14 @@ ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
     - [newAccount]()
     - [sign]()
 * [client](#wygg.client)
-    - [getBranch](#ygg.getBranch)
-    - [getBalance](#ygg.getBalance)
-    - [transfer](#ygg.transfer)
-    - [sendTransaction](#ygg.sendTransaction)
-    - [branch](#ygg.branch)
-    - [plant](#ygg.plant)
+    - [getBranch](#ygg.client.getBranches)
+    - [branch](#ygg.client.branch)
+    - [getBalance](#ygg.client.getBalance)
+    - [transfer](#ygg.client.transfer)
+    - [sendTransaction](#ygg.client.sendTransaction)
+    - [sendTransaction](#ygg.client.getTransactionReceeipt)
+    - [sendTransaction](#ygg.client.getTransaction)
+    - [faucet](#ygg.client.faucet)
     - [getBlocks](#ygg.getBlocks) (Not implemented yet)
     - [getBlockNumber](#ygg.getBlockNumber) (Not implemented yet)
     - [getTransaction](#ygg.getTransaction) (Not implemented yet)
@@ -324,26 +326,53 @@ ygg.client.getbalance(branchId, toAddress).then((balance) => {
 })
 
 ```
+
 ***
-### ygg.client.transfer
+### ygg.client.faucet
+#### Parameters
+`String` -  Contract Version
+#### Returns
+`Object` -  Transaction Hash
+#### Example
+```js
+let contractVersion = '631187ab5b3af0d4c251fdf45c79ad3c6aca4215';
+
+const txBody = ygg.client.faucet(contractVersion);
+console.log(txBody);
+/*
+{ 
+  contractVersion: '631187ab5b3af0d4c251fdf45c79ad3c6aca4215',
+  method: 'faucet',
+  params:
+   {}
+}
+*/
+```
+***
+
+***
+### ygg.client.transferBody
 body required when sending a transaction
 #### Parameters
-`String` -  Branch ID
+`String` -  Contract Version
 `String` -  To address
 `Number` -  Amount
 #### Returns
 `Object` -  body object
 #### Example
 ```js
+let contractVersion = '631187ab5b3af0d4c251fdf45c79ad3c6aca4215';
 let toAddress = 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6';
 let amount = 1004
  
-const transfer = ygg.client.transfer(toAddress, 1004);
-console.log(transfer);
+const txBody = ygg.client.transferBody(contractVersion, toAddress, 1004);
+console.log(txBody);
 /*
 { method: 'transfer',
   params:
-   { address: '0xaca4215631187ab5b3af0d4c251fdf45c79ad3c6',
+   { 
+     contractVersion: '631187ab5b3af0d4c251fdf45c79ad3c6aca4215',
+     address: 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6',
      amount: 1004
    }
 }
