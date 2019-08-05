@@ -406,7 +406,8 @@ console.log(txBody);
   params:
    { 
      contractVersion: '631187ab5b3af0d4c251fdf45c79ad3c6aca4215',
-     address: 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6',
+     fromAddress: '7ab5b3af0d4c251fdf45c7aca4215631189ad3c6',
+     toAddress: 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6',
      amount: 1004
    }
 }
