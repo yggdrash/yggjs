@@ -49,7 +49,9 @@ ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
     - [getBranch](#ygg.client.getBranches)
     - [branch](#ygg.client.branch)
     - [getBalance](#ygg.client.getBalance)
-    - [transfer](#ygg.client.transfer)
+    - [transferBody](#ygg.client.transferBody)
+    - [transferFromBody](#ygg.client.transferFromBody)
+    - [approveBody](#ygg.client.approveBody)
     - [sendTransaction](#ygg.client.sendTransaction)
     - [sendTransaction](#ygg.client.getTransactionReceeipt)
     - [sendTransaction](#ygg.client.getTransaction)
@@ -379,6 +381,69 @@ console.log(txBody);
 */
 ```
 ***
+
+***
+### ygg.client.transferFromBody
+body required when sending a transaction
+#### Parameters
+`String` -  Contract Version
+`String` -  From address
+`String` -  To address
+`Number` -  Amount
+#### Returns
+`Object` -  body object
+#### Example
+```js
+let contractVersion = '631187ab5b3af0d4c251fdf45c79ad3c6aca4215';
+let fromAddress = '7ab5b3af0d4c251fdf45c7aca4215631189ad3c6';
+let toAddress = 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6';
+let amount = 1004
+ 
+const txBody = ygg.client.transferBody(contractVersion, fromAddress, toAddress, 1004);
+console.log(txBody);
+/*
+{ method: 'transferFrom',
+  params:
+   { 
+     contractVersion: '631187ab5b3af0d4c251fdf45c79ad3c6aca4215',
+     address: 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6',
+     amount: 1004
+   }
+}
+*/
+```
+***
+
+***
+### ygg.client.approveBody
+body required when sending a transaction
+#### Parameters
+`String` -  Contract Version
+`String` -  To address
+`Number` -  Amount
+#### Returns
+`Object` -  body object
+#### Example
+```js
+let contractVersion = '631187ab5b3af0d4c251fdf45c79ad3c6aca4215';
+let spenderAddress = 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6';
+let amount = 1004
+ 
+const txBody = ygg.client.approveBody(contractVersion, spenderAddress, 1004);
+console.log(txBody);
+/*
+{ method: 'approve',
+  params:
+   { 
+     contractVersion: '631187ab5b3af0d4c251fdf45c79ad3c6aca4215',
+     address: 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6',
+     amount: 1004
+   }
+}
+*/
+```
+***
+
 ### ygg.client.sendTransction
 Sends a transaction to the network.
 #### Parameters
