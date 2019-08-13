@@ -321,9 +321,10 @@ none
 #### Example
 ```js
 let branchId = 'fe7b7c93dd23f78e12ad42650595bc0f874c88f7';
-let toAddress = '0xaca4215631187ab5b3af0d4c251fdf45c79ad3c6';
+let contractVersion = '8e12ad42650595bc0ffe7b7c93dd23f7874c88f7';
+let toAddress = 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6';
  
-ygg.client.getbalance(branchId, toAddress).then((balance) => {
+ygg.client.getbalance(branchId, contractVersion, toAddress).then((balance) => {
     console.log(balance); // 1000000000
 })
 
@@ -399,7 +400,7 @@ let fromAddress = '7ab5b3af0d4c251fdf45c7aca4215631189ad3c6';
 let toAddress = 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6';
 let amount = 1004
  
-const txBody = ygg.client.transferBody(contractVersion, fromAddress, toAddress, 1004);
+const txBody = ygg.client.transferFromBody(contractVersion, fromAddress, toAddress, 1004);
 console.log(txBody);
 /*
 { method: 'transferFrom',
@@ -463,7 +464,7 @@ Sends a transaction to the network.
 `String` -  Transaction Hash
 #### Example
 ```js
-const body = ygg.client.transfer(to, amount);
+const body = ygg.client.transferBody(to, amount);
 let branchId = Buffer.from('d588b45c0afdcdffca62323bc1783e02f625666e', 'hex').toString('hex')
  
 const rawTx = {
