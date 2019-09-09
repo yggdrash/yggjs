@@ -46,21 +46,15 @@ ygg = new yggjs(new yggjs.providers.HttpProvider("http://localhost:8080"));
     - [newAccount]()
     - [sign]()
 * [client](#wygg.client)
-    - [getBranch](#ygg.client.getBranches)
-    - [branch](#ygg.client.branch)
-    - [getBalance](#ygg.client.getBalance)
+    - [getBranches](#ygg.client.getBranches)
+    - [getBranch](#ygg.client.getBranch)
+    - [query](#ygg.client.query)
     - [transferBody](#ygg.client.transferBody)
     - [transferFromBody](#ygg.client.transferFromBody)
     - [approveBody](#ygg.client.approveBody)
     - [sendTransaction](#ygg.client.sendTransaction)
-    - [sendTransaction](#ygg.client.getTransactionReceeipt)
-    - [sendTransaction](#ygg.client.getTransaction)
+    - [getTransactionReceeipt](#ygg.client.getTransactionReceeipt)
     - [faucet](#ygg.client.faucet)
-    - [getBlocks](#ygg.getBlocks) (Not implemented yet)
-    - [getBlockNumber](#ygg.getBlockNumber) (Not implemented yet)
-    - [getTransaction](#ygg.getTransaction) (Not implemented yet)
-    - [getTransactionFromBlock](#ygg.getTransactionFromBlock) (Not implemented yet)
-    - [getTransactionReceipt](#ygg.getTransactionReceipt) (Not implemented yet)
 * [transaction](#ygg.tx)
     - [tx](#ygg.tx)
     - [sign](#ygg.sign)
@@ -291,13 +285,6 @@ const wallet = hdwallet.derivePath(HDpath).getWallet();
 ```
 *** 
 
-
-## ygg.nodeWallet
-#### ygg.nodeWallet.lockAccount (Not implemented yet)
-#### ygg.nodeWallet.unlockAccount (Not implemented yet)
-#### ygg.nodeWallet.newAccount (Not implemented yet)
-#### ygg.nodeWallet.sign (Not implemented yet) 
-
 ## ygg.client
 ### ygg.client.getBranch
 View the branches registered on the stem
@@ -308,26 +295,48 @@ none
 #### Example
 ```js
 let branchName = 'YEED';
-let branchId = ygg.client.getBranchId(branchName);
-console.log(branchId); //a771a6b5a6cabe2ca35fd55631717d95049d6338
+ygg.client.getBranchId(branchName);
+//a771a6b5a6cabe2ca35fd55631717d95049d6338
 ```
+
 ***
-### ygg.client.getBalance
-View balance in your account
-#### Parameters
-none
+### ygg.client.getBranches
 #### Returns
-`String` -  `bignumber` balance value
+`Object` -  Branches
 #### Example
 ```js
-let branchId = 'fe7b7c93dd23f78e12ad42650595bc0f874c88f7';
-let contractVersion = '8e12ad42650595bc0ffe7b7c93dd23f7874c88f7';
-let toAddress = 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6';
- 
-ygg.client.getbalance(branchId, contractVersion, toAddress).then((balance) => {
-    console.log(balance); // 1000000000
-})
+ygg.client.getBranches(contractVersion);
+/*
+{ 
+  631187ab5b3af0d4c251fdf45c79ad3c6aca4215: {
+    name: yggdrash,
+    symbol: YEED,
+    description: yggdrash blockchain,
+    ...
+    contract:[...]
+    ...
+  }
+}
+*/
+```
 
+***
+### ygg.client.query
+#### Returns
+`Object` -  any
+#### Example
+원하는 메소드에 맞는 파라미터를 넣어서 쿼리문 작성
+```js
+let body = {
+        branchId: "631187ab5b3af0d4c251fdf45c79ad3c6aca4215",
+        contractVersion: "fdf45c79ad3c6aca4215631187ab5b3af0d4c251",
+        method: 'balanceOf',
+        params: {
+            address: "215631187afdf45c79adb5b3af0d4c2513c6aca4"
+        }
+}
+                
+ygg.client.query(body);
 ```
 
 ***
@@ -340,8 +349,7 @@ ygg.client.getbalance(branchId, contractVersion, toAddress).then((balance) => {
 ```js
 let contractVersion = '631187ab5b3af0d4c251fdf45c79ad3c6aca4215';
 
-const txBody = ygg.client.faucet(contractVersion);
-console.log(txBody);
+ygg.client.faucet(contractVersion);
 /*
 { 
   contractVersion: '631187ab5b3af0d4c251fdf45c79ad3c6aca4215',
@@ -351,7 +359,6 @@ console.log(txBody);
 }
 */
 ```
-***
 
 ***
 ### ygg.client.transferBody
@@ -368,8 +375,7 @@ let contractVersion = '631187ab5b3af0d4c251fdf45c79ad3c6aca4215';
 let toAddress = 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6';
 let amount = 1004
  
-const txBody = ygg.client.transferBody(contractVersion, toAddress, 1004);
-console.log(txBody);
+ygg.client.transferBody(contractVersion, toAddress, amount);
 /*
 { method: 'transfer',
   params:
@@ -400,7 +406,7 @@ let fromAddress = '7ab5b3af0d4c251fdf45c7aca4215631189ad3c6';
 let toAddress = 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6';
 let amount = 1004
  
-const txBody = ygg.client.transferFromBody(contractVersion, fromAddress, toAddress, 1004);
+const txBody = ygg.client.transferFromBody(contractVersion, fromAddress, toAddress, amount);
 console.log(txBody);
 /*
 { method: 'transferFrom',
@@ -486,100 +492,6 @@ ygg.client.sendTransaction(serialize).then((txHash) => {
     console.log("hash", txHash)   // ebbe3d2ae42f7fdf0d6f81bca7aec9cac79d58ee688d34ac75ef3a03cfc4d56b
 })
 ```
-***
-### ygg.client.branch
-body required when sending a stem transaction
-#### Parameters
-`Object` - seed infomation
-#### Returns
-`Object` - body data
-#### Example
-```js
-let seed = {           
-         "name": 'YEED',
-         "symbol": 'YEED',
-         "property": 'currency',
-         "type": 'immunity',
-         "description": 'YEED is the currency used inside YGGDRASH. The vitality of the new branch chain is decided by the amount of YEED, which will be consumed gradually.',
-         "tag": 0.1,
-         "version": '0xcc9612ff91ff844938acdb6608e58506a2f21b8a5d77e88726c0897e8d1d02c0',         //TO DO
-         "reference_address": '0xcee3d4755e47055b530deeba062c5bd0c17eb00f',         //TO DO
-         "reserve_address": '0xcee3d4755e47055b530deeba062c5bd0c17eb00f',          //TO DO, node wallet account
-         "owner": 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6',
-         "version_history":['0xcc9612ff91ff844938acdb6608e58506a2f21b8a5d77e88726c0897e8d1d02c0']       //TO DO
-}
- 
-const branch = ygg.client.branch(seed);
-console.log("body", branch)  
-/*
-{ method: 'create',
-  params:
-   [ { branchId: '3a9a851f91aeb790fc23a4b933ccf4c997b25b27',
-       branch: { name: 'YEED',
-                  symbol: 'YEED',
-                  property: 'currency',
-                  type: 'immunity',
-                  description: 'YEED is the currency used inside YGGDRASH. The vitality of the new branch chain is decided by the amount of YEED, which will be consumed gradually.',
-                  tag: 0.1,
-                  version: '0xcc9612ff91ff844938acdb6608e58506a2f21b8a5d77e88726c0897e8d1d02c0',
-                  reference_address: '0xcee3d4755e47055b530deeba062c5bd0c17eb00f',
-                  reserve_address: '0xcee3d4755e47055b530deeba062c5bd0c17eb00f',
-                  owner: 'aca4215631187ab5b3af0d4c251fdf45c79ad3c6',
-                  timestamp: 1539227945,
-                  version_history:   [ '0xcc9612ff91ff844938acdb6608e58506a2f21b8a5d77e88726c0897e8d1d02c0' ]
-                }
-    } ]
-}
-*/
-```
-***
-### ygg.client.plant
-Sends a transaction to the stem network.
-#### Parameters
-`Object` - Transfer transaction data to branch
-- txHeaderData option (ref ygg.tx)
-- timestamp - timestamp 1/1000
-- body length - serialized body length
-- body - serialized json body
-- author - The address that created the transaction
-- hash - Transaction hash(sha3)
-- type - 미정
-- version - 미정
-- body hash - The hashed value of the serialized body with sha3
-- signature - transaction signatrue
-#### Returns
-`String` -  Transaction Hash
-#### Example
-```js
-const body = ygg.client.branch(seed);
- 
-const rawTx = {
-    "chain":'0xfe7b7c93dd23f78e12ad42650595bc0f874c88f7',
-    "version":'0x0000000000000000',
-    "type":'0x0000000000000000',
-    "timeStamp":'0x000000005bada008',
-    "bodyHash":'0xf2feb937f282f105a24e47a69fbd0d705be3771cce695247d391fa5b6f8a7608',
-    "bodyLength":'0x000000000000028a'
-}
- 
-let privateKey = Buffer.from('5654f359c90004451a32dfd0286e61d1944b5a1ecde05808c11138c0c2c26520', 'hex')
-const tx = new ygg.tx(rawTx);
-tx.sign(privateKey);
- 
-let serialize = tx.serialize(body);
- 
-ygg.client.plant(serialize).then((txHash) => {
-    console.log("hash", txHash)   // ebbe3d2ae42f7fdf0d6f81bca7aec9cac79d58ee688d34ac75ef3a03cfc4d56b
-})
-```
-***
-
-#### ygg.client.getBlocks (Not implemented yet)
-#### ygg.client.getBlockNumber (Not implemented yet)
-#### ygg.client.getTransaction (Not implemented yet)
-#### ygg.client.getTransactionFromBlock (Not implemented yet) 
-#### ygg.client.getTransactionReceipt (Not implemented yet) 
-
 
 ## ygg.tx
 ### ygg.tx
