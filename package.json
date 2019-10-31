@@ -1,7 +1,7 @@
 {
   "name": "@yggdrash/sdk",
   "namespace": "yggdrash",
-  "version": "0.6.9",
+  "version": "0.7.0",
   "description": "Yggdrash JavaScript API, middleware to talk to a yggdrash node over RPC",
   "main": "./index.js",
   "directories": {
